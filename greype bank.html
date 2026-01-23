@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>greype&#39;s bank</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Dynamique de Fond + RIB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            background: url('https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg') no-repeat center top fixed;
+            background-size: 70%;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 0;
+        }
+
+        .rib-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            width: 480px;
+            z-index: 1;
+        }
+
+        .rib-container h2 {
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+
+        .rib-container h3 {
+            margin-bottom: 20px;
+            font-size: 3rem;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background: #2980b9;
+            transform: scale(1.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: scale(1);
+        }
+
+        button:focus {
+            outline: none;
+        }
+    </style>
+    <script>
+        // Fonction copie
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Texte copié : " + text);
+            }).catch(err => {
+                console.error("Erreur de copie : ", err);
+            });
+        }
+
+        // Animation canvas
+        window.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('bgCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            const particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 3 + 1,
+                    dx: Math.random() * 2 - 1,
+                    dy: Math.random() * 2 - 1
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                    ctx.fill();
+                    p.x += p.dx;
+                    p.y += p.dy;
+                    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        });
+    </script>
+</head>
+<body>
+
+    <canvas id="bgCanvas"></canvas>
+
+    <div class="rib-container">
+        <h2>Coordonnées Bancaires de :</h2>
+        <h3><strong>GREYPE FRANCE</strong></h3>
+
+        <p><strong>Banque :</strong> BPS PERPIGNAN ENTREPRISE-00070</p>
+        <button onclick="copyToClipboard('BPS PERPIGNAN ENTREPRISE-00070')">Copier/copy</button>
+
+        <p><strong>IBAN :</strong> <span id="iban">FR7616607000282812108151573</span></p>
+        <button onclick="copyToClipboard('FR7616607000282812108151573')">Copier/copy</button>
+
+        <p><strong>BIC :</strong> <span id="bic">CCBPFRPPPPG</span></p>
+        <button onclick="copyToClipboard('CCBPFRPPPPG')">Copier/copy</button>
+    </div>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
