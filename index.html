@@ -186,7 +186,7 @@ const team = [
 const grid = document.getElementById("team");
 
 team.forEach(m => {
-  const initials = m.name.split(" ").map(w => w[0]).join("").slice(0,2);
+  const initials = m.name.split(/[ -]/).map(w => w[0]).join("").slice(0,3);
 
   grid.innerHTML += `
     <div class="card">
