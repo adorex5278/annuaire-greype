@@ -214,12 +214,6 @@ h2 {
   width: 80px;
   height: 80px;
   margin: 0 auto 1.5rem;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .standard-section h3 {
@@ -271,26 +265,39 @@ h2 {
 
 <div class="standard-section">
   <svg class="phone-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <!-- Socle du téléphone -->
-    <ellipse cx="50" cy="85" rx="35" ry="10" fill="#8B7355"/>
-    <!-- Corps du téléphone -->
-    <rect x="30" y="40" width="40" height="35" rx="5" fill="#D4A574" stroke="#8B7355" stroke-width="2"/>
+    <!-- Base -->
+    <ellipse cx="50" cy="90" rx="40" ry="8" fill="#D4A574" stroke="#8B7355" stroke-width="1.5"/>
+    <!-- Corps principal du téléphone -->
+    <rect x="20" y="35" width="60" height="50" rx="8" fill="#D4A574" stroke="#8B7355" stroke-width="2"/>
     <!-- Cadran rotatif -->
-    <circle cx="50" cy="57" r="12" fill="none" stroke="#8B7355" stroke-width="2"/>
-    <circle cx="50" cy="57" r="10" fill="#C9A876" stroke="#8B7355" stroke-width="1"/>
-    <!-- Trous du cadran -->
-    <circle cx="50" cy="48" r="1.5" fill="#8B7355"/>
-    <circle cx="56" cy="54" r="1.5" fill="#8B7355"/>
-    <circle cx="56" cy="60" r="1.5" fill="#8B7355"/>
-    <circle cx="50" cy="66" r="1.5" fill="#8B7355"/>
-    <circle cx="44" cy="60" r="1.5" fill="#8B7355"/>
-    <circle cx="44" cy="54" r="1.5" fill="#8B7355"/>
-    <!-- Aiguille rotative -->
-    <line x1="50" y1="57" x2="50" y2="48" stroke="#8B7355" stroke-width="2" stroke-linecap="round" style="transform-origin: 50px 57px"/>
+    <circle cx="50" cy="55" r="18" fill="#F5DEB3" stroke="#8B7355" stroke-width="2"/>
+    <circle cx="50" cy="55" r="15" fill="#FAEBD7" stroke="#8B7355" stroke-width="1"/>
+    <!-- Chiffres du cadran (1-9, 0) -->
+    <text x="50" y="42" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">1</text>
+    <text x="62" y="48" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">2</text>
+    <text x="68" y="58" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">3</text>
+    <text x="62" y="68" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">4</text>
+    <text x="50" y="74" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">5</text>
+    <text x="38" y="68" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">6</text>
+    <text x="32" y="58" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">7</text>
+    <text x="38" y="48" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">8</text>
+    <text x="50" y="38" text-anchor="middle" font-size="6" fill="#8B7355" font-weight="bold">9</text>
+    <text x="50" y="69" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="bold">0</text>
+    <!-- Centre du cadran -->
+    <circle cx="50" cy="55" r="3" fill="#8B7355"/>
+    <!-- Trou de doigt pour chaque chiffre -->
+    <circle cx="50" cy="41" r="2" fill="#8B7355" opacity="0.5"/>
+    <circle cx="63" cy="48" r="2" fill="#8B7355" opacity="0.5"/>
+    <circle cx="69" cy="58" r="2" fill="#8B7355" opacity="0.5"/>
+    <!-- Support écouteur/microphone -->
+    <path d="M 28 28 Q 28 15 35 12" fill="none" stroke="#8B7355" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 72 28 Q 72 15 65 12" fill="none" stroke="#8B7355" stroke-width="3" stroke-linecap="round"/>
     <!-- Écouteur -->
-    <path d="M 35 30 Q 35 15 45 10" fill="none" stroke="#8B7355" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="35" cy="10" rx="3" ry="4" fill="#8B7355"/>
     <!-- Microphone -->
-    <path d="M 65 30 Q 65 15 55 10" fill="none" stroke="#8B7355" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="65" cy="10" rx="3" ry="4" fill="#8B7355"/>
+    <!-- Cordon enroulé -->
+    <path d="M 50 85 Q 48 82 50 79 Q 52 76 50 73" fill="none" stroke="#8B7355" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
   <h3>☎️ Standard</h3>
   <p><strong>Lundi au vendredi</strong></p>
