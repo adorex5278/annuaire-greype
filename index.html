@@ -331,6 +331,90 @@ h2 {
   border-color: #0A5C3C;
 }
 
+/* Sélection et téléchargement des fiches contact */
+.card-content { position: relative; }
+
+.pick {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  cursor: pointer;
+  line-height: 0;
+}
+.pick-box {
+  width: 18px;
+  height: 18px;
+  accent-color: #0A5C3C;
+  cursor: pointer;
+}
+/* Libellé lisible par les lecteurs d'écran seulement */
+.pick-label {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.btn.vcard { background: #ede9fe; color: #7c3aed; }
+.btn.vcard:hover { background: #7c3aed; color: #fff; }
+
+.tools {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+.tools a {
+  color: #0A5C3C;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10,92,60,.35);
+}
+.tools a:hover { border-bottom-color: #0A5C3C; }
+
+.selbar {
+  position: sticky;
+  bottom: 1rem;
+  z-index: 50;
+  margin: 1.5rem auto 0;
+  max-width: 660px;
+  background: #0A5C3C;
+  color: #fff;
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.selbar[hidden] { display: none; }
+.selbar .count { font-weight: 600; }
+.selbar button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #fff;
+  color: #0A5C3C;
+  transition: 0.2s;
+}
+.selbar button:hover { background: #d7f0e3; }
+.selbar button.ghost {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.5);
+}
+.selbar button.ghost:hover { background: rgba(255,255,255,0.15); }
+.selbar button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.selbar .err { flex-basis: 100%; text-align: center; font-size: 0.85rem; color: #ffd9d9; }
+
 /* Marges réduites sur petit écran */
 @media (max-width: 600px) {
   body { padding: 1.25rem; }
@@ -340,7 +424,7 @@ h2 {
 /* Impression : la page devient une fiche contact propre */
 @media print {
   body { padding: 0; background: #fff; }
-  .top-links, .actions, .fiches-section { display: none; }
+  .top-links, .actions, .fiches-section, .pick, .selbar, .tools { display: none; }
   .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
   .card:hover { transform: none; }
 }
@@ -381,11 +465,20 @@ h2 {
 
 <!-- Cartes générées par build.py à partir de team.json.
      Ne pas éditer à la main entre les marqueurs : le script écrase. -->
+<p class="tools">
+  Cocher des fiches pour composer un fichier sur mesure, ou
+  <a href="vcf/greype-france.vcf" download>télécharger les 11 contacts d'un coup</a>.
+</p>
+
 <div class="grid" id="team">
       <!-- TEAM:START -->
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="matthieu-oribes" data-name="Matthieu ORIBES">
+            <span class="pick-label">Sélectionner Matthieu ORIBES</span>
+          </label>
           <div class="avatar" aria-hidden="true">MO</div>
           <div class="name">Matthieu ORIBES</div>
           <div class="role">Directeur &amp; Commercial</div>
@@ -394,12 +487,17 @@ h2 {
           <a class="btn whatsapp" href="https://wa.me/33609472844" target="_blank" rel="noopener noreferrer" title="WhatsApp Matthieu ORIBES" aria-label="WhatsApp Matthieu ORIBES"><svg class="ico"><use href="#ico-wa"></use></svg></a>
           <a class="btn sms" href="sms:+33609472844" title="SMS Matthieu ORIBES" aria-label="Envoyer un SMS à Matthieu ORIBES">💬</a>
           <a class="btn pappers" href="https://www.pappers.fr/dirigeant/matthieu_oribes_1977-01" target="_blank" rel="noopener noreferrer" title="Fiche Pappers Matthieu ORIBES" aria-label="Fiche Pappers Matthieu ORIBES">📄</a>
+          <a class="btn vcard" href="vcf/matthieu-oribes.vcf" download title="Ajouter Matthieu ORIBES aux contacts" aria-label="Télécharger la fiche contact de Matthieu ORIBES">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="tristan-margalet" data-name="Tristan MARGALET">
+            <span class="pick-label">Sélectionner Tristan MARGALET</span>
+          </label>
           <div class="avatar" aria-hidden="true">TM</div>
           <div class="name">Tristan MARGALET</div>
           <div class="role">Directeur &amp; Commercial</div>
@@ -409,12 +507,17 @@ h2 {
           <a class="btn sms" href="sms:+33609472906" title="SMS Tristan MARGALET" aria-label="Envoyer un SMS à Tristan MARGALET">💬</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/tristan-margalet-019255100/" target="_blank" rel="noopener noreferrer" title="LinkedIn Tristan MARGALET" aria-label="LinkedIn Tristan MARGALET"><svg class="ico"><use href="#ico-li"></use></svg></a>
           <a class="btn pappers" href="https://www.pappers.fr/dirigeant/tristan_margalet_1987-12" target="_blank" rel="noopener noreferrer" title="Fiche Pappers Tristan MARGALET" aria-label="Fiche Pappers Tristan MARGALET">📄</a>
+          <a class="btn vcard" href="vcf/tristan-margalet.vcf" download title="Ajouter Tristan MARGALET aux contacts" aria-label="Télécharger la fiche contact de Tristan MARGALET">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="kim-mohamed" data-name="Kim MOHAMED">
+            <span class="pick-label">Sélectionner Kim MOHAMED</span>
+          </label>
           <div class="avatar" aria-hidden="true">KM</div>
           <div class="name">Kim MOHAMED</div>
           <div class="role">Responsable d&#x27;Entrepôt</div>
@@ -422,12 +525,17 @@ h2 {
           <div class="actions">
           <a class="btn whatsapp" href="https://wa.me/33646343616" target="_blank" rel="noopener noreferrer" title="WhatsApp Kim MOHAMED" aria-label="WhatsApp Kim MOHAMED"><svg class="ico"><use href="#ico-wa"></use></svg></a>
           <a class="btn sms" href="sms:+33646343616" title="SMS Kim MOHAMED" aria-label="Envoyer un SMS à Kim MOHAMED">💬</a>
+          <a class="btn vcard" href="vcf/kim-mohamed.vcf" download title="Ajouter Kim MOHAMED aux contacts" aria-label="Télécharger la fiche contact de Kim MOHAMED">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="maeva-dijoux" data-name="Maëva DIJOUX">
+            <span class="pick-label">Sélectionner Maëva DIJOUX</span>
+          </label>
           <div class="avatar" aria-hidden="true">MD</div>
           <div class="name">Maëva DIJOUX</div>
           <div class="role">Responsable Qualité</div>
@@ -436,12 +544,17 @@ h2 {
           <a class="btn whatsapp" href="https://wa.me/33616380012" target="_blank" rel="noopener noreferrer" title="WhatsApp Maëva DIJOUX" aria-label="WhatsApp Maëva DIJOUX"><svg class="ico"><use href="#ico-wa"></use></svg></a>
           <a class="btn sms" href="sms:+33616380012" title="SMS Maëva DIJOUX" aria-label="Envoyer un SMS à Maëva DIJOUX">💬</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/maeva-dijoux-3244a294/" target="_blank" rel="noopener noreferrer" title="LinkedIn Maëva DIJOUX" aria-label="LinkedIn Maëva DIJOUX"><svg class="ico"><use href="#ico-li"></use></svg></a>
+          <a class="btn vcard" href="vcf/maeva-dijoux.vcf" download title="Ajouter Maëva DIJOUX aux contacts" aria-label="Télécharger la fiche contact de Maëva DIJOUX">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="sebastien-nietche" data-name="Sébastien NIETCHE">
+            <span class="pick-label">Sélectionner Sébastien NIETCHE</span>
+          </label>
           <div class="avatar" aria-hidden="true">SN</div>
           <div class="name">Sébastien NIETCHE</div>
           <div class="role">Commercial</div>
@@ -451,12 +564,17 @@ h2 {
           <a class="btn sms" href="sms:+33652687230" title="SMS Sébastien NIETCHE" aria-label="Envoyer un SMS à Sébastien NIETCHE">💬</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/sebastien-nietche/" target="_blank" rel="noopener noreferrer" title="LinkedIn Sébastien NIETCHE" aria-label="LinkedIn Sébastien NIETCHE"><svg class="ico"><use href="#ico-li"></use></svg></a>
           <a class="btn pappers" href="https://www.pappers.fr/entreprise/nietche-corones-sebastien-933749897" target="_blank" rel="noopener noreferrer" title="Fiche Pappers Sébastien NIETCHE" aria-label="Fiche Pappers Sébastien NIETCHE">📄</a>
+          <a class="btn vcard" href="vcf/sebastien-nietche.vcf" download title="Ajouter Sébastien NIETCHE aux contacts" aria-label="Télécharger la fiche contact de Sébastien NIETCHE">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="matthias-verne" data-name="Matthias VERNE">
+            <span class="pick-label">Sélectionner Matthias VERNE</span>
+          </label>
           <div class="avatar" aria-hidden="true">MV</div>
           <div class="name">Matthias VERNE</div>
           <div class="role">Commercial</div>
@@ -466,12 +584,17 @@ h2 {
           <a class="btn sms" href="sms:+33781699608" title="SMS Matthias VERNE" aria-label="Envoyer un SMS à Matthias VERNE">💬</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/matthias-verne-6b534721b/" target="_blank" rel="noopener noreferrer" title="LinkedIn Matthias VERNE" aria-label="LinkedIn Matthias VERNE"><svg class="ico"><use href="#ico-li"></use></svg></a>
           <a class="btn pappers" href="https://www.pappers.fr/entreprise/verne-matthias-979015682" target="_blank" rel="noopener noreferrer" title="Fiche Pappers Matthias VERNE" aria-label="Fiche Pappers Matthias VERNE">📄</a>
+          <a class="btn vcard" href="vcf/matthias-verne.vcf" download title="Ajouter Matthias VERNE aux contacts" aria-label="Télécharger la fiche contact de Matthias VERNE">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="frederic-cayuela" data-name="Frédéric CAYUELA">
+            <span class="pick-label">Sélectionner Frédéric CAYUELA</span>
+          </label>
           <div class="avatar" aria-hidden="true">FC</div>
           <div class="name">Frédéric CAYUELA</div>
           <div class="role">Commercial</div>
@@ -480,12 +603,17 @@ h2 {
           <a class="btn whatsapp" href="https://wa.me/33628316922" target="_blank" rel="noopener noreferrer" title="WhatsApp Frédéric CAYUELA" aria-label="WhatsApp Frédéric CAYUELA"><svg class="ico"><use href="#ico-wa"></use></svg></a>
           <a class="btn sms" href="sms:+33628316922" title="SMS Frédéric CAYUELA" aria-label="Envoyer un SMS à Frédéric CAYUELA">💬</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-cayuela-a41682132/" target="_blank" rel="noopener noreferrer" title="LinkedIn Frédéric CAYUELA" aria-label="LinkedIn Frédéric CAYUELA"><svg class="ico"><use href="#ico-li"></use></svg></a>
+          <a class="btn vcard" href="vcf/frederic-cayuela.vcf" download title="Ajouter Frédéric CAYUELA aux contacts" aria-label="Télécharger la fiche contact de Frédéric CAYUELA">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="elodie-diaz" data-name="Elodie DIAZ">
+            <span class="pick-label">Sélectionner Elodie DIAZ</span>
+          </label>
           <div class="avatar" aria-hidden="true">ED</div>
           <div class="name">Elodie DIAZ</div>
           <div class="role">Assistante commerciale</div>
@@ -494,24 +622,34 @@ h2 {
           <a class="btn whatsapp" href="https://wa.me/33621915522" target="_blank" rel="noopener noreferrer" title="WhatsApp Elodie DIAZ" aria-label="WhatsApp Elodie DIAZ"><svg class="ico"><use href="#ico-wa"></use></svg></a>
           <a class="btn sms" href="sms:+33621915522" title="SMS Elodie DIAZ" aria-label="Envoyer un SMS à Elodie DIAZ">💬</a>
           <a class="btn linkedin" href="https://www.linkedin.com/in/elodie-diaz-b20724247/" target="_blank" rel="noopener noreferrer" title="LinkedIn Elodie DIAZ" aria-label="LinkedIn Elodie DIAZ"><svg class="ico"><use href="#ico-li"></use></svg></a>
+          <a class="btn vcard" href="vcf/elodie-diaz.vcf" download title="Ajouter Elodie DIAZ aux contacts" aria-label="Télécharger la fiche contact de Elodie DIAZ">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="vanessa-saint-denis" data-name="Vanessa SAINT-DENIS">
+            <span class="pick-label">Sélectionner Vanessa SAINT-DENIS</span>
+          </label>
           <div class="avatar" aria-hidden="true">VSD</div>
           <div class="name">Vanessa SAINT-DENIS</div>
           <div class="role">Assistante commerciale</div>
           <a class="phone" href="tel:+33468819725">📞 +33 4 68 81 97 25</a>
           <div class="actions">
           <a class="btn linkedin" href="https://www.linkedin.com/in/vanessa-saint-denis/" target="_blank" rel="noopener noreferrer" title="LinkedIn Vanessa SAINT-DENIS" aria-label="LinkedIn Vanessa SAINT-DENIS"><svg class="ico"><use href="#ico-li"></use></svg></a>
+          <a class="btn vcard" href="vcf/vanessa-saint-denis.vcf" download title="Ajouter Vanessa SAINT-DENIS aux contacts" aria-label="Télécharger la fiche contact de Vanessa SAINT-DENIS">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="alexandre-cabezas" data-name="Alexandre CABEZAS">
+            <span class="pick-label">Sélectionner Alexandre CABEZAS</span>
+          </label>
           <div class="avatar" aria-hidden="true">AC</div>
           <div class="name">Alexandre CABEZAS</div>
           <div class="role">Commercial</div>
@@ -519,12 +657,17 @@ h2 {
           <div class="actions">
           <a class="btn whatsapp" href="https://wa.me/33628229957" target="_blank" rel="noopener noreferrer" title="WhatsApp Alexandre CABEZAS" aria-label="WhatsApp Alexandre CABEZAS"><svg class="ico"><use href="#ico-wa"></use></svg></a>
           <a class="btn sms" href="sms:+33628229957" title="SMS Alexandre CABEZAS" aria-label="Envoyer un SMS à Alexandre CABEZAS">💬</a>
+          <a class="btn vcard" href="vcf/alexandre-cabezas.vcf" download title="Ajouter Alexandre CABEZAS aux contacts" aria-label="Télécharger la fiche contact de Alexandre CABEZAS">💾</a>
           </div>
         </div>
       </div>
       <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="nicolas-oribes" data-name="Nicolas ORIBES">
+            <span class="pick-label">Sélectionner Nicolas ORIBES</span>
+          </label>
           <div class="avatar" aria-hidden="true">NO</div>
           <div class="name">Nicolas ORIBES</div>
           <div class="role">Commercial</div>
@@ -532,11 +675,85 @@ h2 {
           <div class="actions">
           <a class="btn whatsapp" href="https://wa.me/33776039958" target="_blank" rel="noopener noreferrer" title="WhatsApp Nicolas ORIBES" aria-label="WhatsApp Nicolas ORIBES"><svg class="ico"><use href="#ico-wa"></use></svg></a>
           <a class="btn sms" href="sms:+33776039958" title="SMS Nicolas ORIBES" aria-label="Envoyer un SMS à Nicolas ORIBES">💬</a>
+          <a class="btn vcard" href="vcf/nicolas-oribes.vcf" download title="Ajouter Nicolas ORIBES aux contacts" aria-label="Télécharger la fiche contact de Nicolas ORIBES">💾</a>
           </div>
         </div>
       </div>
       <!-- TEAM:END -->
 </div>
+
+<div class="selbar" id="selbar" hidden>
+  <span class="count" id="selcount"></span>
+  <button type="button" id="seldl">💾 Télécharger la sélection</button>
+  <button type="button" class="ghost" id="selall">Tout cocher</button>
+  <button type="button" class="ghost" id="selnone">Effacer</button>
+  <span class="err" id="selerr" hidden></span>
+</div>
+
+<script>
+/* Sélection multiple : les fiches cochées sont assemblées en un seul .vcf.
+   Les fichiers individuels sont generés par build.py, on les recompose ici
+   plutôt que de dupliquer les données dans la page. */
+(function () {
+  var boxes  = Array.prototype.slice.call(document.querySelectorAll(".pick-box"));
+  var bar    = document.getElementById("selbar");
+  var count  = document.getElementById("selcount");
+  var err    = document.getElementById("selerr");
+  if (!boxes.length || !bar) return;
+
+  function chosen() {
+    return boxes.filter(function (b) { return b.checked; });
+  }
+
+  function refresh() {
+    var n = chosen().length;
+    bar.hidden = n === 0;
+    count.textContent = n + (n > 1 ? " fiches sélectionnées" : " fiche sélectionnée");
+    err.hidden = true;
+  }
+
+  boxes.forEach(function (b) { b.addEventListener("change", refresh); });
+
+  document.getElementById("selall").addEventListener("click", function () {
+    boxes.forEach(function (b) { b.checked = true; });
+    refresh();
+  });
+
+  document.getElementById("selnone").addEventListener("click", function () {
+    boxes.forEach(function (b) { b.checked = false; });
+    refresh();
+  });
+
+  document.getElementById("seldl").addEventListener("click", function () {
+    var sel = chosen();
+    if (!sel.length) return;
+
+    Promise.all(sel.map(function (b) {
+      return fetch("vcf/" + b.value + ".vcf").then(function (r) {
+        if (!r.ok) throw new Error(b.value);
+        return r.text();
+      });
+    })).then(function (parts) {
+      var blob = new Blob([parts.join("")], { type: "text/vcard;charset=utf-8" });
+      var url  = URL.createObjectURL(blob);
+      var a    = document.createElement("a");
+      a.href = url;
+      a.download = "greype-" + sel.length + (sel.length > 1 ? "-contacts" : "-contact") + ".vcf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }).catch(function () {
+      /* Cas typique : page ouverte en local (file://) où fetch est bloqué.
+         Les boutons 💾 de chaque carte, eux, continuent de fonctionner. */
+      err.hidden = false;
+      err.textContent = "Assemblage impossible ici — utiliser le bouton 💾 de chaque fiche.";
+    });
+  });
+
+  refresh();
+})();
+</script>
 
 <div class="fiches-section">
   <h3>📊 Fiches financières publiques</h3>

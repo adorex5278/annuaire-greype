@@ -17,17 +17,121 @@ import json
 import pathlib
 import re
 import sys
+import unicodedata
 
 ROOT = pathlib.Path(__file__).parent
 TEAM = ROOT / "team.json"
 PAGE = ROOT / "index.html"
+VCF = ROOT / "vcf"
 
 START = "<!-- TEAM:START -->"
 END = "<!-- TEAM:END -->"
 
+ORG = "GREYPE FRANCE"
+STANDARD = "+33468819725"
+SITE = "https://adorex5278.github.io/annuaire-greype/index.html"
+
 
 def initials(name):
     return "".join(w[0] for w in re.split(r"[ -]", name) if w)[:3]
+
+
+# --------------------------------------------------------------------
+# vCard 3.0
+# --------------------------------------------------------------------
+
+def slug(name):
+    """Nom de fichier sûr : accents retirés, minuscules, tirets."""
+    s = unicodedata.normalize("NFKD", name)
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = re.sub(r"[^A-Za-z0-9]+", "-", s).strip("-").lower()
+    return s
+
+
+def split_name(full):
+    """'Vanessa SAINT-DENIS' -> ('SAINT-DENIS', 'Vanessa').
+
+    Les tokens entièrement en majuscules sont le nom de famille.
+    """
+    tokens = full.split()
+    last = [t for t in tokens if t == t.upper() and any(c.isalpha() for c in t)]
+    first = [t for t in tokens if t not in last]
+    if not last or not first:  # convention non respectée : on ne devine pas
+        return full, ""
+    return " ".join(last), " ".join(first)
+
+
+def esc(value):
+    """Échappement vCard : backslash, virgule, point-virgule, saut de ligne."""
+    return (value.replace("\\", "\\\\")
+                 .replace(";", "\\;")
+                 .replace(",", "\\,")
+                 .replace("\n", "\\n"))
+
+
+def fold(line):
+    """Repli à 75 octets, continuation préfixée d'une espace (RFC 2426).
+
+    Le découpage se fait sur les octets UTF-8 sans couper un caractère,
+    sinon les prénoms accentués ressortent cassés sur certains téléphones.
+    """
+    raw = line.encode("utf-8")
+    if len(raw) <= 75:
+        return line
+    out, buf, size = [], [], 0
+    limit = 75
+    for ch in line:
+        n = len(ch.encode("utf-8"))
+        if size + n > limit:
+            out.append("".join(buf))
+            buf, size, limit = [ch], n, 74  # +1 pour l'espace de continuation
+        else:
+            buf.append(ch)
+            size += n
+    out.append("".join(buf))
+    return "\r\n ".join(out)
+
+
+def vcard(m):
+    last, first = split_name(m["name"])
+    phone = "+" + m["phone"]
+    is_landline = phone == STANDARD
+
+    lines = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        f"N:{esc(last)};{esc(first)};;;",
+        f"FN:{esc(m['name'])}",
+        f"ORG:{esc(ORG)}",
+        f"TITLE:{esc(m['role'])}",
+    ]
+    # Vanessa partage le numéro du standard : pas de type CELL dans ce cas.
+    if is_landline:
+        lines.append(f"TEL;TYPE=WORK,VOICE:{phone}")
+    else:
+        lines.append(f"TEL;TYPE=CELL,VOICE:{phone}")
+        lines.append(f"TEL;TYPE=WORK,VOICE:{STANDARD}")
+
+    lines.append(f"URL:{SITE}")
+    if m.get("linkedin"):
+        lines.append(f"X-SOCIALPROFILE;TYPE=linkedin:{m['linkedin']}")
+    lines.append("END:VCARD")
+
+    return "\r\n".join(fold(l) for l in lines) + "\r\n"
+
+
+def write_vcards(team):
+    VCF.mkdir(exist_ok=True)
+    for old in VCF.glob("*.vcf"):
+        old.unlink()
+
+    for m in team:
+        m["slug"] = slug(m["name"])
+        (VCF / f"{m['slug']}.vcf").write_bytes(vcard(m).encode("utf-8"))
+
+    combined = "".join(vcard(m) for m in team)
+    (VCF / "greype-france.vcf").write_bytes(combined.encode("utf-8"))
+    print(f"OK : {len(team)} vCard + 1 fichier complet dans vcf/")
 
 
 def card(m):
@@ -60,10 +164,21 @@ def card(m):
             f'aria-label="Fiche Pappers {name}">📄</a>'
         )
 
+    slg = e(m["slug"])
+    actions.append(
+        f'<a class="btn vcard" href="vcf/{slg}.vcf" download '
+        f'title="Ajouter {name} aux contacts" '
+        f'aria-label="Télécharger la fiche contact de {name}">💾</a>'
+    )
+
     acts = "\n          ".join(actions)
     return f"""      <div class="card">
         <div class="card-top"></div>
         <div class="card-content">
+          <label class="pick">
+            <input type="checkbox" class="pick-box" value="{slg}" data-name="{name}">
+            <span class="pick-label">Sélectionner {name}</span>
+          </label>
           <div class="avatar" aria-hidden="true">{e(initials(m["name"]))}</div>
           <div class="name">{name}</div>
           <div class="role">{e(m["role"])}</div>
@@ -91,6 +206,12 @@ def main():
         if m["phone"] in seen:
             print(f"  attention : numéro en double -> {m['name']} ({m['display']})")
         seen.add(m["phone"])
+
+    write_vcards(team)
+
+    slugs = [m["slug"] for m in team]
+    if len(set(slugs)) != len(slugs):
+        sys.exit("ERREUR : deux personnes produisent le même nom de fichier vCard")
 
     page = PAGE.read_text(encoding="utf-8")
     if START not in page or END not in page:

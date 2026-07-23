@@ -71,3 +71,24 @@ pays compris, sans `+`), `display` (version lisible), puis au choix
 `build.py` refuse de générer si un champ obligatoire manque, si `phone`
 contient autre chose que des chiffres, ou si `phone` et `display` ne
 correspondent pas — de quoi éviter qu'un numéro erroné parte en ligne.
+
+---
+
+# Fiches contact (vCard)
+
+`build.py` génère `vcf/` en même temps que les cartes :
+
+- `vcf/<prenom>-<nom>.vcf` — une fiche par personne, bouton 💾 sur sa carte
+- `vcf/greype-france.vcf` — les 11 contacts, lien au-dessus de la grille
+
+Le dossier est **entièrement régénéré** à chaque build : ne rien y ajouter
+à la main, tout fichier étranger sera supprimé.
+
+Format vCard 3.0, UTF-8, fins de ligne CRLF, repli des lignes à 75 octets
+sans couper un caractère multi-octets — sinon les prénoms accentués
+ressortent cassés sur certains téléphones.
+
+La sélection multiple de la page recompose les fichiers individuels côté
+navigateur (`fetch` + Blob). Elle nécessite que la page soit servie en
+HTTP(S) : ouverte en `file://`, l'assemblage échoue et un message renvoie
+vers les boutons 💾 individuels, qui fonctionnent toujours.
