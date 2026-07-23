@@ -79,7 +79,10 @@ correspondent pas — de quoi éviter qu'un numéro erroné parte en ligne.
 `build.py` génère `vcf/` en même temps que les cartes :
 
 - `vcf/<prenom>-<nom>.vcf` — une fiche par personne, bouton 💾 sur sa carte
-- `vcf/greype-france.vcf` — les 11 contacts, lien au-dessus de la grille
+- `vcf/greype-france-standard.vcf` — le standard, en tant que société
+  (`X-ABShowAs:COMPANY`), avec les horaires en NOTE
+- `vcf/greype-france.vcf` — le standard puis les 11 personnes, lien au-dessus
+  de la grille
 
 Le dossier est **entièrement régénéré** à chaque build : ne rien y ajouter
 à la main, tout fichier étranger sera supprimé.

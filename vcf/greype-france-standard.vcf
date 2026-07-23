@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:GREYPE FRANCE;;;;
+FN:GREYPE FRANCE
+ORG:GREYPE FRANCE
+X-ABShowAs:COMPANY
+item1.TEL;TYPE=WORK,VOICE,PREF:+33468819725
+item1.X-ABLabel:Standard (fixe)
+URL:https://adorex5278.github.io/annuaire-greype/index.html
+NOTE:Standard : du lundi au vendredi\, 08h00-12h00 et 13h30-16h30.
+END:VCARD

@@ -29,6 +29,8 @@ END = "<!-- TEAM:END -->"
 
 ORG = "GREYPE FRANCE"
 STANDARD = "+33468819725"
+STANDARD_SLUG = "greype-france-standard"
+HOURS = "Standard : du lundi au vendredi, 08h00-12h00 et 13h30-16h30."
 SITE = "https://adorex5278.github.io/annuaire-greype/index.html"
 
 
@@ -127,6 +129,28 @@ def vcard(m):
     return "\r\n".join(fold(l) for l in lines) + "\r\n"
 
 
+def standard_vcard():
+    """Fiche du standard, en tant que société et non comme personne.
+
+    X-ABShowAs:COMPANY évite qu'iOS tente de découper « GREYPE FRANCE » en
+    prénom / nom et l'affiche comme une entreprise.
+    """
+    lines = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        f"N:{esc(ORG)};;;;",
+        f"FN:{esc(ORG)}",
+        f"ORG:{esc(ORG)}",
+        "X-ABShowAs:COMPANY",
+        f"item1.TEL;TYPE=WORK,VOICE,PREF:{STANDARD}",
+        "item1.X-ABLabel:Standard (fixe)",
+        f"URL:{SITE}",
+        f"NOTE:{esc(HOURS)}",
+        "END:VCARD",
+    ]
+    return "\r\n".join(fold(l) for l in lines) + "\r\n"
+
+
 def write_vcards(team):
     VCF.mkdir(exist_ok=True)
     for old in VCF.glob("*.vcf"):
@@ -136,9 +160,13 @@ def write_vcards(team):
         m["slug"] = slug(m["name"])
         (VCF / f"{m['slug']}.vcf").write_bytes(vcard(m).encode("utf-8"))
 
-    combined = "".join(vcard(m) for m in team)
+    std = standard_vcard()
+    (VCF / f"{STANDARD_SLUG}.vcf").write_bytes(std.encode("utf-8"))
+
+    # Le fichier groupé contient le standard en premier, puis l'équipe.
+    combined = std + "".join(vcard(m) for m in team)
     (VCF / "greype-france.vcf").write_bytes(combined.encode("utf-8"))
-    print(f"OK : {len(team)} vCard + 1 fichier complet dans vcf/")
+    print(f"OK : {len(team)} vCard + le standard + 1 fichier complet dans vcf/")
 
 
 def card(m):

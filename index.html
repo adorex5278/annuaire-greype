@@ -361,6 +361,25 @@ h2 {
 .btn.vcard { background: #ede9fe; color: #7c3aed; }
 .btn.vcard:hover { background: #7c3aed; color: #fff; }
 
+.standard-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+}
+.pick-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: #666;
+  cursor: pointer;
+}
+
 .tools {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -424,7 +443,8 @@ h2 {
 /* Impression : la page devient une fiche contact propre */
 @media print {
   body { padding: 0; background: #fff; }
-  .top-links, .actions, .fiches-section, .pick, .selbar, .tools { display: none; }
+  .top-links, .actions, .fiches-section, .pick, .selbar, .tools,
+  .standard-actions { display: none; }
   .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
   .card:hover { transform: none; }
 }
@@ -455,6 +475,16 @@ h2 {
   <p><strong>Lundi au vendredi</strong></p>
   <p>08:00 - 12:00<br>13:30 - 16:30</p>
   <a href="tel:+33468819725" class="standard-phone">📞 +33 4 68 81 97 25</a>
+
+  <div class="standard-actions">
+    <a class="btn vcard" href="vcf/greype-france-standard.vcf" download
+       title="Ajouter le standard aux contacts"
+       aria-label="Télécharger la fiche contact du standard">💾</a>
+    <label class="pick-inline">
+      <input type="checkbox" class="pick-box" value="greype-france-standard" data-name="Standard GREYPE FRANCE">
+      Ajouter à la sélection
+    </label>
+  </div>
 </div>
 
 <!-- Icônes définies une seule fois, réutilisées par les cartes via <use> -->
@@ -467,7 +497,7 @@ h2 {
      Ne pas éditer à la main entre les marqueurs : le script écrase. -->
 <p class="tools">
   Cocher des fiches pour composer un fichier sur mesure, ou
-  <a href="vcf/greype-france.vcf" download>télécharger les 11 contacts d'un coup</a>.
+  <a href="vcf/greype-france.vcf" download>télécharger l'équipe et le standard d'un coup</a>.
 </p>
 
 <div class="grid" id="team">
