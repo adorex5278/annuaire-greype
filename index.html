@@ -9,9 +9,34 @@
 <meta name="description" content="Annuaire de l'équipe GREYPE France : contacts commerciaux et logistiques, standard, coordonnées multilingues et informations bancaires.">
 <meta name="theme-color" content="#0A5C3C">
 
-<!-- Favicon : pointe sur le logo syndicat (mis à jour depuis la base INPI) -->
-<link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg">
-<link rel="apple-touch-icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg">
+<!-- Favicon : logo syndicat (auto-MAJ via INPI), repli local si le tiers ne répond pas -->
+<link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/favicon-fallback.svg">
+<link rel="apple-touch-icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/favicon-fallback.svg">
+
+<script>
+// Chaîne de repli pour toute image distante.
+// data-fallbacks="a.svg,b.svg" : on essaie a.svg, puis b.svg, puis on abandonne.
+function fallbackImg(el) {
+  var list = (el.getAttribute("data-fallbacks") || "").split(",").filter(Boolean);
+  if (!list.length) { el.onerror = null; return; }
+  el.setAttribute("data-fallbacks", list.slice(1).join(","));
+  el.src = list[0];
+}
+
+// Le favicon n'a pas d'événement onerror : on teste le chargement du logo distant
+// et on bascule les <link> sur le repli local si l'image ne vient pas.
+(function () {
+  var links = document.querySelectorAll("link[data-fallback]");
+  if (!links.length) return;
+  var probe = new Image();
+  probe.onerror = function () {
+    for (var i = 0; i < links.length; i++) {
+      links[i].href = links[i].getAttribute("data-fallback");
+    }
+  };
+  probe.src = links[0].href;
+})();
+</script>
 
 <meta property="og:title" content="Annuaire GREYPE France - Notre Équipe">
 <meta property="og:description" content="Contactez directement notre équipe commerciale et logistique. Tous les numéros et coordonnées de GREYPE France en un seul endroit.">
@@ -323,7 +348,8 @@ h2 {
 
 <body>
 
-<img class="logo" src="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" alt="GREYPE France">
+<img class="logo" src="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" alt="GREYPE France"
+     data-fallbacks="assets/logo.jpg,assets/logo-fallback.svg" onerror="fallbackImg(this)">
 <div class="top-links">
   <a class="top-btn" href="https://docs.google.com/document/d/1KiWgD1xivS_WsTg8jSBoSRGMUr42aFeL/preview" target="_blank" rel="noopener noreferrer">📄 Coordonnées (french)</a>
   <a class="top-btn" href="https://docs.google.com/document/d/18oH3gB0NcfYcrX_kCYEtLPLOhAz68xQi/preview" target="_blank" rel="noopener noreferrer">📄 Contact details (english)</a>
@@ -402,22 +428,22 @@ document.getElementById("team").innerHTML = cards;
   <h3>📊 Fiches financières publiques</h3>
   <div class="fiches-grid">
     <a class="fiche-btn" href="https://www.societe.com/societe/greype-france-753407485.html" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=societe.com" alt=""><span>Societe.com</span>
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=societe.com" alt="" data-fallbacks="assets/icons/societe.svg" onerror="fallbackImg(this)"><span>Societe.com</span>
     </a>
     <a class="fiche-btn" href="https://www.pappers.fr/entreprise/greype-france-753407485" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=pappers.fr" alt=""><span>Pappers</span>
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=pappers.fr" alt="" data-fallbacks="assets/icons/pappers.svg" onerror="fallbackImg(this)"><span>Pappers</span>
     </a>
     <a class="fiche-btn" href="https://www.infogreffe.fr/entreprise-societe/753407485-greype-france.html" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=infogreffe.fr" alt=""><span>Infogreffe</span>
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=infogreffe.fr" alt="" data-fallbacks="assets/icons/infogreffe.svg" onerror="fallbackImg(this)"><span>Infogreffe</span>
     </a>
     <a class="fiche-btn" href="https://annuaire-entreprises.data.gouv.fr/entreprise/greype-france-greype-france-753407485" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=annuaire-entreprises.data.gouv.fr" alt=""><span>Annuaire des Entreprises</span>
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=annuaire-entreprises.data.gouv.fr" alt="" data-fallbacks="assets/icons/annuaire.svg" onerror="fallbackImg(this)"><span>Annuaire des Entreprises</span>
     </a>
     <a class="fiche-btn" href="https://data.inpi.fr/entreprises/753407485" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=inpi.fr" alt=""><span>INPI</span>
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=inpi.fr" alt="" data-fallbacks="assets/icons/inpi.svg" onerror="fallbackImg(this)"><span>INPI</span>
     </a>
     <a class="fiche-btn" href="https://annuaire.agencebio.org/operateur/181268" target="_blank" rel="noopener noreferrer">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=agencebio.org" alt=""><span>Agence Bio</span>
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=agencebio.org" alt="" data-fallbacks="assets/icons/agencebio.svg" onerror="fallbackImg(this)"><span>Agence Bio</span>
     </a>
   </div>
 </div>

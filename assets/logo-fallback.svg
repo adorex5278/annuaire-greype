@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 100" role="img" aria-label="GREYPE France">
+  <rect width="260" height="100" fill="none"/>
+  <text x="130" y="52" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="42" font-weight="700" letter-spacing="2" fill="#0A5C3C">GREYPE</text>
+  <rect x="90" y="62" width="80" height="3" fill="#7CB342"/>
+  <text x="130" y="86" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+        font-size="18" font-weight="400" letter-spacing="6" fill="#10865F">FRANCE</text>
+</svg>
