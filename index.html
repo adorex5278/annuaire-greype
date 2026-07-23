@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>contact info</title>
-    
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://public.saintcharlesinternational.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
-<title>Annuaire GREYPE France</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://public.saintcharlesinternational.com https://www.google.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
+
+<title>Annuaire GREYPE France — Notre Équipe</title>
+<meta name="description" content="Annuaire de l'équipe GREYPE France : contacts commerciaux et logistiques, standard, coordonnées multilingues et informations bancaires.">
+<meta name="theme-color" content="#0A5C3C">
+
+<!-- Favicon : pointe sur le logo syndicat (mis à jour depuis la base INPI) -->
+<link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg">
+<link rel="apple-touch-icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg">
+
 <meta property="og:title" content="Annuaire GREYPE France - Notre Équipe">
 <meta property="og:description" content="Contactez directement notre équipe commerciale et logistique. Tous les numéros et coordonnées de GREYPE France en un seul endroit.">
 <meta property="og:image" content="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg">
 <meta property="og:url" content="https://adorex5278.github.io/annuaire-greype/index.html">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Annuaire GREYPE France">
 <meta name="twitter:description" content="Contactez directement notre équipe commerciale et logistique.">
@@ -162,7 +160,13 @@ h2 {
   cursor: pointer;
   border: none;
   font-size: 16px;
+  text-decoration: none;
   transition: 0.3s;
+}
+
+.btn:focus-visible {
+  outline: 3px solid #0A5C3C;
+  outline-offset: 2px;
 }
 
 .btn.whatsapp {
@@ -301,6 +305,19 @@ h2 {
   border-color: #0A5C3C;
 }
 
+/* Marges réduites sur petit écran */
+@media (max-width: 600px) {
+  body { padding: 1.25rem; }
+  h2 { font-size: 1.9rem; }
+}
+
+/* Impression : la page devient une fiche contact propre */
+@media print {
+  body { padding: 0; background: #fff; }
+  .top-links, .actions, .fiches-section { display: none; }
+  .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+  .card:hover { transform: none; }
+}
 </style>
 </head>
 
@@ -308,12 +325,12 @@ h2 {
 
 <img class="logo" src="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" alt="GREYPE France">
 <div class="top-links">
-  <a class="top-btn" href="https://docs.google.com/document/d/1KiWgD1xivS_WsTg8jSBoSRGMUr42aFeL/edit" target="_blank">📄 Coordonnées (french)</a>
-  <a class="top-btn" href="https://docs.google.com/document/d/18oH3gB0NcfYcrX_kCYEtLPLOhAz68xQi/edit" target="_blank">📄 Contact details (english)</a>
-  <a class="top-btn" href="https://docs.google.com/document/d/1wPGQqPpESzJOPDP9CRk22M1nmJDmlowc/edit?usp=sharing&ouid=116362348984426997239&rtpof=true&sd=true" target="_blank">📄 Coordinadas</a>
-  <a class="top-btn" href="https://codepen.io/Adrien-Gehan/full/JoPzPjv" target="_blank">🏦 Banque</a>
-  <a class="top-btn" href="https://drive.google.com/file/d/15xMfOCVuwa51qTcvyqqjXX2_2SBrSBjB/view?usp=drive_link" target="_blank">🏦 RIB BANQUE POPULAIRE</a>
-  <a class="top-btn" href="https://drive.google.com/file/d/1bO1OpyhqH0v899HOxBnqKsuozMxDdG4R/view?usp=drive_link" target="_blank">🏦 RIB Crédit Agricole</a>
+  <a class="top-btn" href="https://docs.google.com/document/d/1KiWgD1xivS_WsTg8jSBoSRGMUr42aFeL/preview" target="_blank" rel="noopener noreferrer">📄 Coordonnées (french)</a>
+  <a class="top-btn" href="https://docs.google.com/document/d/18oH3gB0NcfYcrX_kCYEtLPLOhAz68xQi/preview" target="_blank" rel="noopener noreferrer">📄 Contact details (english)</a>
+  <a class="top-btn" href="https://docs.google.com/document/d/1wPGQqPpESzJOPDP9CRk22M1nmJDmlowc/preview" target="_blank" rel="noopener noreferrer">📄 Coordinadas</a>
+  <a class="top-btn" href="https://codepen.io/Adrien-Gehan/full/JoPzPjv" target="_blank" rel="noopener noreferrer">🏦 Banque</a>
+  <a class="top-btn" href="https://drive.google.com/file/d/15xMfOCVuwa51qTcvyqqjXX2_2SBrSBjB/view?usp=drive_link" target="_blank" rel="noopener noreferrer">🏦 RIB BANQUE POPULAIRE</a>
+  <a class="top-btn" href="https://drive.google.com/file/d/1bO1OpyhqH0v899HOxBnqKsuozMxDdG4R/view?usp=drive_link" target="_blank" rel="noopener noreferrer">🏦 RIB Crédit Agricole</a>
 </div>
 <h2>Notre Équipe</h2>
 <div class="bar"></div>
@@ -322,14 +339,21 @@ h2 {
 </p>
 
 <div class="standard-section">
-  <div style="font-size: 60px; margin: 0 auto 1.5rem;">☎️</div>
-  <h3>☎️ Standard</h3>
+  <div style="font-size: 60px; margin: 0 auto 1.5rem;" aria-hidden="true">☎️</div>
+  <h3>Standard</h3>
   <p><strong>Lundi au vendredi</strong></p>
   <p>08:00 - 12:00<br>13:30 - 16:30</p>
   <a href="tel:+33468819725" class="standard-phone">📞 +33 4 68 81 97 25</a>
 </div>
 
 <div class="grid" id="team"></div>
+
+<noscript>
+  <p style="text-align:center;color:#b91c1c;">
+    L'affichage de l'équipe nécessite JavaScript.
+    Standard : <a href="tel:+33468819725">+33 4 68 81 97 25</a>
+  </p>
+</noscript>
 
 <script>
 const team = [
@@ -346,104 +370,57 @@ const team = [
   { name:"Nicolas ORIBES", role:"Commercial", phone:"33776039958", display:"+33 7 76 03 99 58", whatsapp:true, sms:true }
 ];
 
-const grid = document.getElementById("team");
+const ICON_WA = '<svg viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.742 5.494 2.042 7.807L0 32l8.418-2.01A15.94 15.94 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.28 13.28 0 01-6.784-1.856l-.486-.29-5.002 1.194 1.23-4.87-.317-.5A13.267 13.267 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.27-9.98c-.398-.199-2.354-1.162-2.72-1.294-.366-.133-.632-.199-.898.199-.266.398-1.031 1.294-1.264 1.56-.233.265-.465.299-.863.1-.398-.2-1.681-.62-3.203-1.977-1.184-1.057-1.983-2.362-2.215-2.76-.233-.398-.025-.613.175-.811.18-.179.398-.465.597-.698.2-.232.266-.398.399-.664.133-.265.066-.498-.033-.697-.1-.2-.898-2.164-1.23-2.962-.324-.778-.653-.673-.898-.685l-.765-.013c-.266 0-.698.1-1.064.498-.366.398-1.397 1.365-1.397 3.329s1.43 3.86 1.629 4.126c.2.265 2.814 4.297 6.818 6.026.953.411 1.696.657 2.276.841.956.304 1.827.261 2.515.158.767-.114 2.354-.963 2.687-1.893.333-.93.333-1.727.233-1.893-.1-.165-.366-.265-.764-.464z"/></svg>';
+const ICON_LI = '<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.05-8.809 0-9.728h3.554v1.375c.427-.659 1.191-1.598 2.897-1.598 2.117 0 3.704 1.384 3.704 4.362v5.589zM5.337 9.433c-1.144 0-1.915-.762-1.915-1.715 0-.956.77-1.715 1.968-1.715 1.197 0 1.911.759 1.938 1.715 0 .953-.74 1.715-1.991 1.715zm1.582 11.019H3.756V8.957h3.163v11.495zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>';
 
-team.forEach(m => {
+const cards = team.map(m => {
   const initials = m.name.split(/[ -]/).map(w => w[0]).join("").slice(0,3);
 
-  grid.innerHTML += `
+  return `
     <div class="card">
       <div class="card-top"></div>
       <div class="card-content">
-        <div class="avatar">${initials}</div>
+        <div class="avatar" aria-hidden="true">${initials}</div>
         <div class="name">${m.name}</div>
         <div class="role">${m.role}</div>
-        <a class="phone" href="tel:${m.phone}">📞 ${m.display}</a>
+        <a class="phone" href="tel:+${m.phone}">📞 ${m.display}</a>
         <div class="actions">
-          ${m.whatsapp ? `<button class="btn whatsapp" onclick="openWhatsApp('${m.phone}')" title="WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.742 5.494 2.042 7.807L0 32l8.418-2.01A15.94 15.94 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.28 13.28 0 01-6.784-1.856l-.486-.29-5.002 1.194 1.23-4.87-.317-.5A13.267 13.267 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.27-9.98c-.398-.199-2.354-1.162-2.72-1.294-.366-.133-.632-.199-.898.199-.266.398-1.031 1.294-1.264 1.56-.233.265-.465.299-.863.1-.398-.2-1.681-.62-3.203-1.977-1.184-1.057-1.983-2.362-2.215-2.76-.233-.398-.025-.613.175-.811.18-.179.398-.465.597-.698.2-.232.266-.398.399-.664.133-.265.066-.498-.033-.697-.1-.2-.898-2.164-1.23-2.962-.324-.778-.653-.673-.898-.685l-.765-.013c-.266 0-.698.1-1.064.498-.366.398-1.397 1.365-1.397 3.329s1.43 3.86 1.629 4.126c.2.265 2.814 4.297 6.818 6.026.953.411 1.696.657 2.276.841.956.304 1.827.261 2.515.158.767-.114 2.354-.963 2.687-1.893.333-.93.333-1.727.233-1.893-.1-.165-.366-.265-.764-.464z"/></svg></button>` : ""}
-          ${m.sms ? `<a class="btn sms" href="sms:+${m.phone}" title="SMS">💬</a>` : ""}
-          ${m.linkedin ? `<a class="btn linkedin" href="${m.linkedin}" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.05-8.809 0-9.728h3.554v1.375c.427-.659 1.191-1.598 2.897-1.598 2.117 0 3.704 1.384 3.704 4.362v5.589zM5.337 9.433c-1.144 0-1.915-.762-1.915-1.715 0-.956.77-1.715 1.968-1.715 1.197 0 1.911.759 1.938 1.715 0 .953-.74 1.715-1.991 1.715zm1.582 11.019H3.756V8.957h3.163v11.495zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>` : ""}
-          ${m.pappers ? `<a class="btn pappers" href="${m.pappers}" target="_blank">📄</a>` : ""}
+          ${m.whatsapp ? `<a class="btn whatsapp" href="https://wa.me/${m.phone}" target="_blank" rel="noopener noreferrer" title="WhatsApp ${m.name}" aria-label="WhatsApp ${m.name}">${ICON_WA}</a>` : ""}
+          ${m.sms ? `<a class="btn sms" href="sms:+${m.phone}" title="SMS ${m.name}" aria-label="Envoyer un SMS à ${m.name}">💬</a>` : ""}
+          ${m.linkedin ? `<a class="btn linkedin" href="${m.linkedin}" target="_blank" rel="noopener noreferrer" title="LinkedIn ${m.name}" aria-label="LinkedIn ${m.name}">${ICON_LI}</a>` : ""}
+          ${m.pappers ? `<a class="btn pappers" href="${m.pappers}" target="_blank" rel="noopener noreferrer" title="Fiche Pappers ${m.name}" aria-label="Fiche Pappers ${m.name}">📄</a>` : ""}
         </div>
       </div>
     </div>
   `;
-});
+}).join("");
 
-function openWhatsApp(phone) {
-  const url = `https://wa.me/${phone}`;
-
-  // ouverture directe (mobile-friendly)
-  window.location.href = url;
-
-  // fallback simple et fiable
-  setTimeout(() => {
-    copyText(url);
-    showToast("Lien WhatsApp copié");
-  }, 1500);
-}
-
-function copyText(text) {
-  const el = document.createElement("textarea");
-  el.value = text;
-  el.setAttribute("readonly", "");
-  el.style.position = "absolute";
-  el.style.left = "-9999px";
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand("copy");
-  document.body.removeChild(el);
-}
-
-function showToast(msg) {
-  const t = document.createElement("div");
-  t.textContent = msg;
-  t.style.cssText = `
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#0A5C3C;
-    color:#fff;
-    padding:10px 16px;
-    border-radius:8px;
-    font-size:14px;
-    box-shadow:0 4px 12px rgba(0,0,0,.2);
-    z-index:9999;
-  `;
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 2500);
-}
+document.getElementById("team").innerHTML = cards;
 </script>
-
 
 <div class="fiches-section">
   <h3>📊 Fiches financières publiques</h3>
   <div class="fiches-grid">
-    <a class="fiche-btn" href="https://www.societe.com/societe/greype-france-753407485.html" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=societe.com" alt="Societe.com"><span>Societe.com</span>
+    <a class="fiche-btn" href="https://www.societe.com/societe/greype-france-753407485.html" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=societe.com" alt=""><span>Societe.com</span>
     </a>
-    <a class="fiche-btn" href="https://www.pappers.fr/entreprise/greype-france-753407485" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=pappers.fr" alt="Pappers"><span>Pappers</span>
+    <a class="fiche-btn" href="https://www.pappers.fr/entreprise/greype-france-753407485" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=pappers.fr" alt=""><span>Pappers</span>
     </a>
-    <a class="fiche-btn" href="https://www.infogreffe.fr/entreprise-societe/753407485-greype-france.html" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=infogreffe.fr" alt="Infogreffe"><span>Infogreffe</span>
+    <a class="fiche-btn" href="https://www.infogreffe.fr/entreprise-societe/753407485-greype-france.html" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=infogreffe.fr" alt=""><span>Infogreffe</span>
     </a>
-    <a class="fiche-btn" href="https://annuaire-entreprises.data.gouv.fr/entreprise/greype-france-greype-france-753407485" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=annuaire-entreprises.data.gouv.fr" alt="Annuaire des Entreprises"><span>Annuaire des Entreprises</span>
+    <a class="fiche-btn" href="https://annuaire-entreprises.data.gouv.fr/entreprise/greype-france-greype-france-753407485" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=annuaire-entreprises.data.gouv.fr" alt=""><span>Annuaire des Entreprises</span>
     </a>
-    <a class="fiche-btn" href="https://data.inpi.fr/entreprises/753407485" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=inpi.fr" alt="INPI"><span>INPI</span>
+    <a class="fiche-btn" href="https://data.inpi.fr/entreprises/753407485" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=inpi.fr" alt=""><span>INPI</span>
     </a>
-    <a class="fiche-btn" href="https://annuaire.agencebio.org/operateur/181268" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=64&domain=agencebio.org" alt="Agence Bio"><span>Agence Bio</span>
+    <a class="fiche-btn" href="https://annuaire.agencebio.org/operateur/181268" target="_blank" rel="noopener noreferrer">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=agencebio.org" alt=""><span>Agence Bio</span>
     </a>
   </div>
 </div>
 
 </body>
-</html>
-    
-  </body>
-  
 </html>
