@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://public.saintcharlesinternational.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://public.saintcharlesinternational.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
 
 <title>Coordonnées bancaires — GREYPE FRANCE</title>
 <meta name="description" content="Coordonnées bancaires de GREYPE FRANCE.">
-<meta name="theme-color" content="#0A5C3C">
+<meta name="theme-color" content="#00632E">
 
-<!-- Page contenant un IBAN : on la retire des moteurs de recherche.
-     Retirer cette ligne si l'indexation est souhaitée. -->
+<!-- Page exposant des IBAN : retirée des moteurs de recherche.
+     Supprimer cette ligne si l'indexation est souhaitée. -->
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/favicon.png">
@@ -18,221 +18,431 @@
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
-
 body {
-  background: url('https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg') no-repeat center top fixed;
-  background-size: min(70%, 420px);
-  background-color: #0b3d2a;
-  color: white;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
 }
-
+/* Logo de fond */
+.bg-logo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 800px;
+    aspect-ratio: 2 / 1;
+    background: url('https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg') no-repeat center / contain;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.15;
+}
+/* Canvas animation */
 canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 0;
-  pointer-events: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
 }
-
+/* Carte principale */
 .rib-container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 480px;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 950px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.10),
+        0 0 30px rgba(106, 175, 35, 0.08);
 }
-
-.rib-container h2 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
+/* Titres */
+h2 {
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 5px;
 }
-
-.rib-container h3 {
-  margin-bottom: 20px;
-  font-size: clamp(1.8rem, 8vw, 3rem);
+h3 {
+    color: #00632E;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
-
-.rib-container p {
-  margin-top: 10px;
-  overflow-wrap: anywhere;
+/* Colonnes banques */
+.banks-wrapper {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: flex-start;
 }
-
+.bank-column {
+    flex: 1;
+    min-width: 250px;
+}
+.bank-column h4 {
+    color: #00632E;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+/* Blocs infos */
+.info-group {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.info-group:last-child {
+    border-bottom: none;
+}
+.info-group p {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.data-text {
+    display: block;
+    font-family: monospace;
+    font-size: 1.05rem;
+    color: #000;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+/* Boutons */
 button {
-  background: #3498db;
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  margin-top: 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1.2rem;
-  transition: 0.3s;
-  margin-bottom: 20px;
+    background: #6AAF23;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
-
 button:hover {
-  background: #2980b9;
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: #00632E;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(106, 175, 35, 0.30);
 }
-
 button:active {
-  transform: scale(1);
+    transform: scale(0.95);
 }
-
 button:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 3px;
+    outline: 3px solid #00632E;
+    outline-offset: 3px;
 }
-
+/* Notification de copie */
 #toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #0A5C3C;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.2);
-  z-index: 9999;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00632E;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+    z-index: 9999;
+    max-width: 90vw;
 }
-
+/* -------------------------- */
+/* VERSION MOBILE             */
+/* -------------------------- */
+@media (max-width: 768px) {
+    .rib-container {
+        width: 95%;
+        max-width: 95%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+    .banks-wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .bank-column {
+        width: 100%;
+        min-width: auto;
+    }
+    h2 {
+        font-size: 1rem;
+    }
+    h3 {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+    .bank-column h4 {
+        margin-bottom: 15px;
+    }
+    .data-text {
+        font-size: 0.95rem;
+    }
+    button {
+        width: 100%;
+    }
+    .bg-logo {
+        width: 90%;
+    }
+}
 @media (prefers-reduced-motion: reduce) {
-  button { transition: none; }
-  button:hover { transform: none; }
+    canvas { display: none; }
+    button { transition: none; }
+    button:hover { transform: none; }
+}
+/* Impression : fiche RIB propre */
+@media print {
+    body { display: block; background: #fff; padding: 0; }
+    canvas, .bg-logo, button, #toast { display: none !important; }
+    .rib-container { box-shadow: none; border: none; width: 100%; max-width: 100%; backdrop-filter: none; background: #fff; }
+    .banks-wrapper { display: flex; }
 }
 </style>
 </head>
 <body>
 
+<div class="bg-logo" id="bgLogo" aria-hidden="true"></div>
 <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
 <div class="rib-container">
-  <h2>Coordonnées Bancaires de :</h2>
-  <h3><strong>GREYPE FRANCE</strong></h3>
+    <h2>Coordonnées Bancaires de :</h2>
+    <h3>GREYPE FRANCE</h3>
 
-  <p><strong>Banque :</strong> <span id="banque">BPS PERPIGNAN ENTREPRISE-00070</span></p>
-  <button type="button" onclick="copyFrom('banque')">Copier/copy</button>
+    <div class="banks-wrapper">
+        <div class="bank-column">
+            <h4>Banque Populaire du Sud</h4>
 
-  <p><strong>IBAN :</strong> <span id="iban">FR7616607000282812108151573</span></p>
-  <button type="button" onclick="copyFrom('iban')">Copier/copy</button>
+            <div class="info-group">
+                <p id="lbl-bp-banque">Banque</p>
+                <span class="data-text" id="bp-banque">BPS PERPIGNAN ENTREPRISE-00070</span>
+                <button type="button" onclick="copyFrom('bp-banque')" aria-label="Copier l'intitulé de la banque, Banque Populaire du Sud">Copier</button>
+            </div>
 
-  <p><strong>BIC :</strong> <span id="bic">CCBPFRPPPPG</span></p>
-  <button type="button" onclick="copyFrom('bic')">Copier/copy</button>
+            <div class="info-group">
+                <p>IBAN</p>
+                <span class="data-text iban" id="bp-iban">FR76 1660 7000 2828 1210 8151 573</span>
+                <button type="button" onclick="copyFrom('bp-iban')" aria-label="Copier l'IBAN Banque Populaire du Sud">Copier</button>
+            </div>
+
+            <div class="info-group">
+                <p>BIC</p>
+                <span class="data-text" id="bp-bic">CCBPFRPPPPG</span>
+                <button type="button" onclick="copyFrom('bp-bic')" aria-label="Copier le BIC Banque Populaire du Sud">Copier</button>
+            </div>
+        </div>
+
+        <div class="bank-column">
+            <h4>CRÉDIT AGRICOLE</h4>
+
+            <div class="info-group">
+                <p>Domiciliation</p>
+                <span class="data-text" id="ca-dom">CGC ENT PO</span>
+                <button type="button" onclick="copyFrom('ca-dom')" aria-label="Copier la domiciliation Crédit Agricole">Copier</button>
+            </div>
+
+            <div class="info-group">
+                <p>IBAN</p>
+                <span class="data-text iban" id="ca-iban">FR76 1710 6011 6730 0262 5093 132</span>
+                <button type="button" onclick="copyFrom('ca-iban')" aria-label="Copier l'IBAN Crédit Agricole">Copier</button>
+            </div>
+
+            <div class="info-group">
+                <p>BIC</p>
+                <span class="data-text" id="ca-bic">AGRIFRPP871</span>
+                <button type="button" onclick="copyFrom('ca-bic')" aria-label="Copier le BIC Crédit Agricole">Copier</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-// --- Copie, avec repli si l'API Clipboard est indisponible (http, vieux navigateur) ---
+/* ------------------------------------------------------------------
+   COPIE
+   La valeur copiée est lue dans le <span> affiché : une seule source
+   de vérité. Les IBAN sont affichés par groupes de 4 et copiés sans
+   espaces (classe .iban). Modifier un numéro à un seul endroit suffit.
+------------------------------------------------------------------ */
 function copyFrom(id) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  var text = el.textContent.trim();
+    var el = document.getElementById(id);
+    if (!el) return;
+    var text = el.textContent.trim();
+    if (el.classList.contains("iban")) text = text.replace(/\s+/g, "");
 
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text)
-      .then(function () { toast("Copié : " + text); })
-      .catch(function () { selectText(el); toast("Copie auto impossible — texte sélectionné"); });
-  } else {
-    selectText(el);
-    toast("Copie auto impossible — texte sélectionné");
-  }
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text)
+            .then(function () { toast("Copié : " + text); })
+            .catch(function () { fallbackCopy(el); });
+    } else {
+        fallbackCopy(el);
+    }
 }
 
-function selectText(el) {
-  var range = document.createRange();
-  range.selectNodeContents(el);
-  var sel = window.getSelection();
-  sel.removeAllRanges();
-  sel.addRange(range);
+function fallbackCopy(el) {
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    toast("Copie automatique indisponible — texte sélectionné");
 }
 
 var toastTimer;
 function toast(msg) {
-  var t = document.getElementById("toast");
-  if (!t) {
-    t = document.createElement("div");
-    t.id = "toast";
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(function () { t.remove(); }, 2500);
+    var t = document.getElementById("toast");
+    if (!t) {
+        t = document.createElement("div");
+        t.id = "toast";
+        t.setAttribute("role", "status");
+        document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.remove(); }, 2500);
 }
 
-// --- Repli local si le logo distant ne répond pas (fond de page + favicon) ---
+/* ------------------------------------------------------------------
+   LOGO DE FOND : repli local si le serveur distant ne répond pas
+------------------------------------------------------------------ */
 (function () {
-  var links = document.querySelectorAll("link[data-fallback]");
-  var probe = new Image();
-  probe.onerror = function () {
-    document.body.style.backgroundImage = "url('assets/logo.jpg')";
-    for (var i = 0; i < links.length; i++) {
-      links[i].href = links[i].getAttribute("data-fallback");
-    }
-  };
-  probe.src = "https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg";
+    var remote = "https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg";
+    var links = document.querySelectorAll("link[data-fallback]");
+    var probe = new Image();
+    probe.onerror = function () {
+        var logo = document.getElementById("bgLogo");
+        if (logo) logo.style.backgroundImage = "url('assets/logo.jpg')";
+        for (var i = 0; i < links.length; i++) {
+            links[i].href = links[i].getAttribute("data-fallback");
+        }
+    };
+    probe.src = remote;
 })();
 
-// --- Animation de fond ---
-window.addEventListener('DOMContentLoaded', function () {
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+/* ------------------------------------------------------------------
+   ANIMATION DE FOND
+------------------------------------------------------------------ */
+(function () {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  var canvas = document.getElementById('bgCanvas');
-  var ctx = canvas.getContext('2d');
+    var canvas = document.getElementById("bgCanvas");
+    var ctx = canvas.getContext("2d");
+    var width, height, particles = [];
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
+    var config = {
+        count: 60,
+        gravity: 0.08,
+        friction: 0.995,
+        explosionChance: 0.03,
+        explosionForce: 20,
+        emojiScale: 1.6,
+        emojis: ["🍆", "🍅", "🫑", "🥒", "🧅", "🍊", "🍋"]
+    };
 
-  var particles = [];
-  for (var i = 0; i < 50; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 3 + 1,
-      dx: Math.random() * 2 - 1,
-      dy: Math.random() * 2 - 1
+    var emojiCache = {};
+
+    function preRender() {
+        config.emojis.forEach(function (e) {
+            var c = document.createElement("canvas");
+            c.width = 80;
+            c.height = 80;
+            var x = c.getContext("2d");
+            x.font = "50px Arial";
+            x.textAlign = "center";
+            x.textBaseline = "middle";
+            x.fillText(e, 40, 40);
+            emojiCache[e] = c;
+        });
+    }
+
+    function Part() { this.init(); }
+    Part.prototype.init = function () {
+        this.r = 15 + Math.random() * 20;
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.dx = (Math.random() - 0.5) * 4;
+        this.dy = (Math.random() - 0.5) * 4;
+        this.img = emojiCache[config.emojis[Math.floor(Math.random() * config.emojis.length)]];
+    };
+    Part.prototype.update = function () {
+        this.dy += config.gravity;
+        this.dx *= config.friction;
+        this.dy *= config.friction;
+        this.x += this.dx;
+        this.y += this.dy;
+        if (this.x - this.r < 0)      { this.x = this.r;          this.dx *= -1; }
+        if (this.x + this.r > width)  { this.x = width - this.r;  this.dx *= -1; }
+        if (this.y - this.r < 0)      { this.y = this.r;          this.dy *= -1; }
+        if (this.y + this.r > height) {
+            this.y = height - this.r;
+            this.dy *= -0.9;
+            if (Math.abs(this.dy) < 0.3) this.dy = 0;
+        }
+    };
+    Part.prototype.draw = function () {
+        var size = this.r * 2 * config.emojiScale;
+        ctx.drawImage(this.img, this.x - size / 2, this.y - size / 2, size, size);
+    };
+
+    function explode(ex, ey) {
+        particles.forEach(function (p) {
+            var dx = p.x - ex, dy = p.y - ey;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 400 && dist > 0) {
+                var force = ((400 - dist) / 400) * config.explosionForce;
+                p.dx += (dx / dist) * force;
+                p.dy -= Math.abs(dy / dist) * force * 1.5;
+            }
+        });
+    }
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+
+    // Le clic ne doit pas déclencher d'explosion sur les boutons de copie
+    window.addEventListener("mousedown", function (e) {
+        if (e.target.closest(".rib-container")) return;
+        explode(e.clientX, e.clientY);
     });
-  }
+    window.addEventListener("touchstart", function (e) {
+        if (e.target.closest(".rib-container")) return;
+        explode(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(function (p) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.fill();
-      p.x += p.dx;
-      p.y += p.dy;
-      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-    });
-    requestAnimationFrame(animate);
-  }
-  animate();
-});
+    resize();
+    preRender();
+    particles = [];
+    for (var i = 0; i < config.count; i++) particles.push(new Part());
+
+    (function animate() {
+        ctx.clearRect(0, 0, width, height);
+        if (Math.random() < config.explosionChance) {
+            explode(Math.random() * width, height);
+        }
+        particles.forEach(function (p) { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    })();
+})();
 </script>
 
 </body>
