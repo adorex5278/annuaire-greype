@@ -46,3 +46,28 @@ cp nouveau-logo.jpg assets/logo.jpg
 convert assets/logo.jpg -crop 144x144+3+3 +repage -resize 64x64   assets/favicon.png
 convert assets/logo.jpg -crop 144x144+3+3 +repage -resize 180x180 assets/apple-touch-icon.png
 ```
+
+---
+
+# Modifier l'équipe
+
+Les cartes de `index.html` sont **générées**. Ne pas les éditer à la main :
+tout ce qui se trouve entre `<!-- TEAM:START -->` et `<!-- TEAM:END -->`
+est écrasé au prochain build.
+
+```bash
+# 1. éditer la liste
+nano team.json
+# 2. régénérer
+python3 build.py
+# 3. committer les deux fichiers
+git add team.json index.html && git commit -m "MAJ equipe" && git push
+```
+
+Champs d'une entrée : `name`, `role`, `phone` (chiffres uniquement, indicatif
+pays compris, sans `+`), `display` (version lisible), puis au choix
+`whatsapp`, `sms` (booléens), `linkedin`, `pappers` (URL).
+
+`build.py` refuse de générer si un champ obligatoire manque, si `phone`
+contient autre chose que des chiffres, ou si `phone` et `display` ne
+correspondent pas — de quoi éviter qu'un numéro erroné parte en ligne.

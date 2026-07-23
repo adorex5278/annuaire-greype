@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page introuvable — GREYPE FRANCE</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A5C3C">
+
+<style>
+/* Page volontairement autonome : aucune image ni feuille de style externe.
+   GitHub Pages sert ce fichier pour n'importe quelle URL inexistante, y
+   compris /un/chemin/profond/ — les liens relatifs y seraient cassés. */
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #f9fafb;
+  color: #333;
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.box {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  padding: 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.mark {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #0A5C3C, #10865F);
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #0A5C3C;
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin: 0 0 0.5rem;
+}
+
+.bar {
+  width: 60px;
+  height: 4px;
+  background: #7CB342;
+  margin: 1rem auto 1.5rem;
+}
+
+p { line-height: 1.6; color: #555; margin: 0 0 1rem; }
+
+.home {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  background: #0A5C3C;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.home:hover { background: #10865F; }
+.home:focus-visible { outline: 3px solid #0A5C3C; outline-offset: 3px; }
+
+.tel {
+  display: block;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  font-size: 0.9rem;
+  color: #666;
+}
+.tel a { color: #0A5C3C; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="box">
+  <div class="mark" aria-hidden="true">G</div>
+  <h1>Page introuvable</h1>
+  <div class="bar"></div>
+
+  <p>
+    L'adresse demandée n'existe pas ou a été déplacée.
+    Les coordonnées de l'équipe restent accessibles depuis l'annuaire.
+  </p>
+
+  <a class="home" href="https://adorex5278.github.io/annuaire-greype/index.html">Retour à l'annuaire</a>
+
+  <span class="tel">
+    Standard, du lundi au vendredi<br>
+    <a href="tel:+33468819725">+33 4 68 81 97 25</a>
+  </span>
+</div>
+
+</body>
+</html>
