@@ -1,4 +1,27 @@
 <!DOCTYPE html>
+<!--
+  ANNUAIRE GREYPE FRANCE  —  page principale
+  https://adorex5278.github.io/annuaire-greype/index.html
+
+  AVANT DE MODIFIER : lire README.md à la racine. Plusieurs choix de ce
+  fichier ressemblent à des bugs sans en être.
+
+  * Les cartes de l'équipe sont GÉNÉRÉES par build.py à partir de team.json.
+    Tout ce qui se trouve entre les marqueurs TEAM:START et TEAM:END (plus
+    bas dans ce fichier) est écrasé au prochain build. Pour modifier
+    l'équipe : éditer team.json, puis lancer  python3 build.py
+  * Le logo distant (public.saintcharlesinternational.com) est VOLONTAIRE :
+    il est alimenté depuis la base INPI et se met à jour tout seul.
+    assets/logo.jpg n'est qu'un repli. Ne pas inverser.
+  * La CSP ci-dessous est ACTIVE. Toute nouvelle ressource externe doit y
+    être déclarée, sinon elle est bloquée sans message visible.
+    google.com ET gstatic.com sont requis : s2/favicons redirige vers gstatic.
+  * Ce fichier doit contenir UN SEUL document HTML. Les exports CodePen en
+    imbriquent deux, ce qui fait ignorer les meta OG, le viewport et la CSP.
+  * Ne jamais écrire les marqueurs entre délimiteurs de commentaire dans ce
+    bloc : un commentaire HTML ne s'imbrique pas, et build.py matcherait ici.
+-->
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">

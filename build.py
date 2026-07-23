@@ -249,8 +249,19 @@ def main():
         sys.exit("ERREUR : deux personnes produisent le même nom de fichier vCard")
 
     page = PAGE.read_text(encoding="utf-8")
-    if START not in page or END not in page:
-        sys.exit(f"ERREUR : marqueurs {START} / {END} introuvables dans index.html")
+
+    # Un marqueur en double — typiquement cité dans un commentaire de
+    # documentation — ferait écrire les cartes au mauvais endroit, sans
+    # erreur visible. On refuse plutôt que de produire une page corrompue.
+    for marker in (START, END):
+        n = page.count(marker)
+        if n != 1:
+            sys.exit(
+                f"ERREUR : le marqueur {marker} apparaît {n} fois dans index.html "
+                f"(attendu : exactement 1).\n"
+                f"Ne pas citer les marqueurs avec leurs délimiteurs de commentaire "
+                f"ailleurs dans le fichier : un commentaire HTML ne s'imbrique pas."
+            )
 
     cards = "\n".join(card(m) for m in team)
     page = re.sub(
