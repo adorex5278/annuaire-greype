@@ -105,12 +105,19 @@ def vcard(m):
         f"ORG:{esc(ORG)}",
         f"TITLE:{esc(m['role'])}",
     ]
-    # Vanessa partage le numéro du standard : pas de type CELL dans ce cas.
+    # Vanessa partage le numéro du standard : une seule entrée, pas de CELL.
+    #
+    # L'étiquette explicite passe par le groupement item1./X-ABLabel : c'est la
+    # convention Apple, honorée par iOS et macOS. Les autres plateformes
+    # ignorent le X-ABLabel et retombent sur TYPE=WORK,VOICE, ce qui reste
+    # correct pour un fixe (l'absence de CELL suffit à le distinguer).
     if is_landline:
-        lines.append(f"TEL;TYPE=WORK,VOICE:{phone}")
+        lines.append(f"item1.TEL;TYPE=WORK,VOICE:{phone}")
+        lines.append("item1.X-ABLabel:Standard (fixe)")
     else:
-        lines.append(f"TEL;TYPE=CELL,VOICE:{phone}")
-        lines.append(f"TEL;TYPE=WORK,VOICE:{STANDARD}")
+        lines.append(f"TEL;TYPE=CELL,VOICE,PREF:{phone}")
+        lines.append(f"item1.TEL;TYPE=WORK,VOICE:{STANDARD}")
+        lines.append("item1.X-ABLabel:Standard (fixe)")
 
     lines.append(f"URL:{SITE}")
     if m.get("linkedin"):

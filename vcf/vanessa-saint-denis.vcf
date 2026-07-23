@@ -4,7 +4,8 @@ N:SAINT-DENIS;Vanessa;;;
 FN:Vanessa SAINT-DENIS
 ORG:GREYPE FRANCE
 TITLE:Assistante commerciale
-TEL;TYPE=WORK,VOICE:+33468819725
+item1.TEL;TYPE=WORK,VOICE:+33468819725
+item1.X-ABLabel:Standard (fixe)
 URL:https://adorex5278.github.io/annuaire-greype/index.html
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/vanessa-saint-den
  is/

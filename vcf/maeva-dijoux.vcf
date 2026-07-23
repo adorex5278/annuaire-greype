@@ -4,8 +4,9 @@ N:DIJOUX;Maëva;;;
 FN:Maëva DIJOUX
 ORG:GREYPE FRANCE
 TITLE:Responsable Qualité
-TEL;TYPE=CELL,VOICE:+33616380012
-TEL;TYPE=WORK,VOICE:+33468819725
+TEL;TYPE=CELL,VOICE,PREF:+33616380012
+item1.TEL;TYPE=WORK,VOICE:+33468819725
+item1.X-ABLabel:Standard (fixe)
 URL:https://adorex5278.github.io/annuaire-greype/index.html
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/maeva-dijoux-3244
  a294/

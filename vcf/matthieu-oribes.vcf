@@ -4,7 +4,8 @@ N:ORIBES;Matthieu;;;
 FN:Matthieu ORIBES
 ORG:GREYPE FRANCE
 TITLE:Directeur & Commercial
-TEL;TYPE=CELL,VOICE:+33609472844
-TEL;TYPE=WORK,VOICE:+33468819725
+TEL;TYPE=CELL,VOICE,PREF:+33609472844
+item1.TEL;TYPE=WORK,VOICE:+33468819725
+item1.X-ABLabel:Standard (fixe)
 URL:https://adorex5278.github.io/annuaire-greype/index.html
 END:VCARD

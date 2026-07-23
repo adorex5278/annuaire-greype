@@ -4,8 +4,9 @@ N:CAYUELA;Frédéric;;;
 FN:Frédéric CAYUELA
 ORG:GREYPE FRANCE
 TITLE:Commercial
-TEL;TYPE=CELL,VOICE:+33628316922
-TEL;TYPE=WORK,VOICE:+33468819725
+TEL;TYPE=CELL,VOICE,PREF:+33628316922
+item1.TEL;TYPE=WORK,VOICE:+33468819725
+item1.X-ABLabel:Standard (fixe)
 URL:https://adorex5278.github.io/annuaire-greype/index.html
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/fr%C3%A9d%C3%A9ri
  c-cayuela-a41682132/

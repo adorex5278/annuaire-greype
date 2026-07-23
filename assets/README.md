@@ -88,6 +88,12 @@ Format vCard 3.0, UTF-8, fins de ligne CRLF, repli des lignes à 75 octets
 sans couper un caractère multi-octets — sinon les prénoms accentués
 ressortent cassés sur certains téléphones.
 
+Chaque fiche porte le mobile de la personne (type CELL, marqué préféré) et
+le standard, étiqueté « Standard (fixe) » via le groupement `item1.` /
+`X-ABLabel` — convention Apple honorée par iOS et macOS. Ailleurs le label
+est ignoré et le numéro reste en `TYPE=WORK,VOICE`, ce qui le distingue
+déjà d'un mobile.
+
 La sélection multiple de la page recompose les fichiers individuels côté
 navigateur (`fetch` + Blob). Elle nécessite que la page soit servie en
 HTTP(S) : ouverte en `file://`, l'assemblage échoue et un message renvoie

@@ -4,8 +4,9 @@ N:DIAZ;Elodie;;;
 FN:Elodie DIAZ
 ORG:GREYPE FRANCE
 TITLE:Assistante commerciale
-TEL;TYPE=CELL,VOICE:+33621915522
-TEL;TYPE=WORK,VOICE:+33468819725
+TEL;TYPE=CELL,VOICE,PREF:+33621915522
+item1.TEL;TYPE=WORK,VOICE:+33468819725
+item1.X-ABLabel:Standard (fixe)
 URL:https://adorex5278.github.io/annuaire-greype/index.html
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/elodie-diaz-b2072
  4247/

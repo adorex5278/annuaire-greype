@@ -4,8 +4,9 @@ N:MARGALET;Tristan;;;
 FN:Tristan MARGALET
 ORG:GREYPE FRANCE
 TITLE:Directeur & Commercial
-TEL;TYPE=CELL,VOICE:+33609472906
-TEL;TYPE=WORK,VOICE:+33468819725
+TEL;TYPE=CELL,VOICE,PREF:+33609472906
+item1.TEL;TYPE=WORK,VOICE:+33468819725
+item1.X-ABLabel:Standard (fixe)
 URL:https://adorex5278.github.io/annuaire-greype/index.html
 X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/tristan-margalet-
  019255100/
