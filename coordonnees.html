@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--
+  COORDONNÉES GREYPE FRANCE — surcouche d'affichage des Google Docs
+
+  But : garder les documents Google Docs (édition inchangée côté Google) mais
+  les présenter dans une page maîtrisée, avec un bouton d'impression explicite.
+
+  ─ POURQUOI CETTE PAGE EXISTE ─────────────────────────────────────────────
+  Le lien /preview d'un Google Doc masque la barre d'outils : plus de bouton
+  imprimer, ce qui bloque les utilisateurs. Cette page réintègre le /preview
+  dans une iframe et ajoute ses propres boutons autour.
+
+  ─ LIMITE TECHNIQUE À CONNAÎTRE ───────────────────────────────────────────
+  Le bouton « Imprimer » ne peut PAS piloter l'iframe : le document vient d'un
+  autre domaine (docs.google.com), le navigateur interdit à cette page d'y
+  toucher (sécurité cross-origin). Le bouton ouvre donc la version PDF
+  (export?format=pdf) dans un nouvel onglet, qui elle s'imprime normalement.
+  Ce n'est pas contournable — c'est le fonctionnement voulu.
+
+  ─ CHANGER UN DOCUMENT ────────────────────────────────────────────────────
+  Modifier l'ID dans l'objet DOCS ci-dessous. Chaque ID sert à la fois à
+  l'aperçu et au bouton PDF. Les liens Google d'origine ne sont pas modifiés.
+-->
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche société — GREYPE FRANCE</title>
+<meta name="theme-color" content="#0A5C3C">
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/favicon.png">
+<link rel="apple-touch-icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/apple-touch-icon.png">
+
+<style>
+:root { --vert: #0A5C3C; --vert-clair: #10865F; --anis: #7CB342; }
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #f9fafb;
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Barre supérieure : retour + actions */
+.barre {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.retour {
+  color: var(--vert);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-right: auto;
+}
+.retour:hover { text-decoration: underline; }
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+.btn-print { background: var(--vert); color: #fff; }
+.btn-print:hover { background: var(--vert-clair); }
+.btn-ghost {
+  background: transparent;
+  color: var(--vert);
+  border: 1px solid rgba(10,92,60,0.35);
+}
+.btn-ghost:hover { background: rgba(10,92,60,0.06); }
+.btn:focus-visible { outline: 3px solid var(--vert); outline-offset: 2px; }
+
+/* Onglets de langue */
+.onglets {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 0 1.2rem;
+  display: flex;
+  gap: 0.3rem;
+  overflow-x: auto;
+}
+.onglet {
+  border: none;
+  background: transparent;
+  padding: 0.8rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #777;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: 0.15s;
+}
+.onglet:hover { color: var(--vert); }
+.onglet[aria-selected="true"] {
+  color: var(--vert);
+  border-bottom-color: var(--anis);
+}
+.onglet:focus-visible { outline: 3px solid var(--vert); outline-offset: -3px; }
+
+/* Zone d'aperçu */
+.cadre {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+}
+.cadre iframe {
+  flex: 1;
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.aide {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #888;
+  padding: 0 1rem 1rem;
+}
+
+@media (max-width: 600px) {
+  .retour { flex-basis: 100%; margin-bottom: 0.3rem; }
+  .barre .btn { flex: 1; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="barre">
+  <a class="retour" href="index.html">← Retour à l'annuaire</a>
+  <a class="btn btn-print" id="print" href="#" target="_blank" rel="noopener noreferrer">🖨️ <span id="print-label">Imprimer / PDF</span></a>
+  <a class="btn btn-ghost" id="full" href="#" target="_blank" rel="noopener noreferrer">⛶ <span id="full-label">Plein écran</span></a>
+</div>
+
+<div class="onglets" role="tablist" aria-label="Langue du document">
+  <button class="onglet" role="tab" data-lang="fr" aria-selected="true">🇫🇷 Fiche société</button>
+  <button class="onglet" role="tab" data-lang="en" aria-selected="false">🇬🇧 Company profile</button>
+  <button class="onglet" role="tab" data-lang="es" aria-selected="false">🇪🇸 Ficha de empresa</button>
+</div>
+
+<div class="cadre">
+  <iframe id="doc" title="Fiche société GREYPE FRANCE" loading="lazy"></iframe>
+</div>
+
+<p class="aide" id="aide">
+  L'aperçu ci-dessus ne s'imprime pas directement.
+  Le bouton <strong>Imprimer / PDF</strong> ouvre une version imprimable.
+</p>
+
+<script>
+/* ─ Les trois documents. Un seul endroit à modifier pour en changer. ───────
+   Ces ID viennent de tes liens Google existants, ils ne les remplacent pas. */
+var DOCS = {
+  fr: "1KiWgD1xivS_WsTg8jSBoSRGMUr42aFeL",
+  en: "18oH3gB0NcfYcrX_kCYEtLPLOhAz68xQi",
+  es: "1wPGQqPpESzJOPDP9CRk22M1nmJDmlowc"
+};
+
+/* Libellés traduits des boutons et du texte d'aide, selon l'onglet actif. */
+var I18N = {
+  fr: { print: "Imprimer / PDF", full: "Plein écran",
+        aide: "L'aperçu ci-dessus ne s'imprime pas directement. Le bouton <strong>Imprimer / PDF</strong> ouvre une version imprimable." },
+  en: { print: "Print / PDF", full: "Full screen",
+        aide: "The preview above cannot be printed directly. The <strong>Print / PDF</strong> button opens a printable version." },
+  es: { print: "Imprimir / PDF", full: "Pantalla completa",
+        aide: "La vista previa no se puede imprimir directamente. El botón <strong>Imprimir / PDF</strong> abre una versión imprimible." }
+};
+
+var iframe = document.getElementById("doc");
+var print  = document.getElementById("print");
+var full   = document.getElementById("full");
+var onglets = Array.prototype.slice.call(document.querySelectorAll(".onglet"));
+
+function afficher(lang) {
+  var id = DOCS[lang];
+  var base = "https://docs.google.com/document/d/" + id;
+  iframe.src   = base + "/preview";
+  print.href   = base + "/export?format=pdf";
+  full.href    = base + "/preview";
+
+  document.getElementById("print-label").textContent = I18N[lang].print;
+  document.getElementById("full-label").textContent  = I18N[lang].full;
+  document.getElementById("aide").innerHTML           = I18N[lang].aide;
+
+  onglets.forEach(function (o) {
+    o.setAttribute("aria-selected", o.dataset.lang === lang ? "true" : "false");
+  });
+}
+
+onglets.forEach(function (o) {
+  o.addEventListener("click", function () { afficher(o.dataset.lang); });
+});
+
+/* Langue initiale : ?lang=en dans l'URL, sinon la langue du navigateur,
+   sinon français. Permet de lier directement une langue depuis l'annuaire. */
+var params = new URLSearchParams(location.search);
+var initiale = params.get("lang");
+if (!DOCS[initiale]) {
+  var nav = (navigator.language || "fr").slice(0, 2);
+  initiale = DOCS[nav] ? nav : "fr";
+}
+afficher(initiale);
+</script>
+
+</body>
+</html>

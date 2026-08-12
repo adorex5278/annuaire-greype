@@ -251,3 +251,22 @@ Puis vérifier à la main, dans `index.html` et `greypebank.html` : un seul
 - Le comportement réel de l'import vCard sur iOS et Android
 
 Ces points se testent uniquement sur le site publié, depuis un vrai téléphone.
+
+---
+
+## coordonnees.html — surcouche des fiches société Google Docs
+
+Enrobe le /preview des trois Google Docs (FR/EN/ES) dans une page maîtrisée,
+avec un bouton d'impression explicite. Existe parce que le mode /preview masque
+la barre d'outils Google, donc le bouton imprimer natif.
+
+- Les IDs des trois docs sont dans l'objet DOCS en haut du <script>. Seul
+  endroit à modifier pour changer un document. Les liens Google d'origine ne
+  sont pas remplacés, juste ré-employés.
+- Le bouton « Imprimer / PDF » ouvre export?format=pdf : il NE PEUT PAS piloter
+  l'iframe (cross-origin), il ouvre donc la version PDF. Seule voie possible.
+- Langue via ?lang=fr|en|es, sinon langue du navigateur, sinon fr.
+- noindex : la fiche contient des données d'entreprise.
+
+Les trois docs doivent être traduits DANS Google (le bouton ne traduit que
+l'interface autour, pas le contenu du document).
