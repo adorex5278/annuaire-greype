@@ -20,18 +20,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://public.saintcharlesinternational.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
 
 <title>Coordonnées bancaires — GREYPE FRANCE</title>
 <meta name="description" content="Coordonnées bancaires de GREYPE FRANCE.">
-<meta name="theme-color" content="#00632E">
+<meta name="theme-color" content="#BE1622">
 
 <!-- Page exposant des IBAN : retirée des moteurs de recherche.
      Supprimer cette ligne si l'indexation est souhaitée. -->
 <meta name="robots" content="noindex, nofollow">
 
-<link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/favicon.png">
-<link rel="apple-touch-icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <style>
 * {
@@ -59,8 +59,8 @@ body {
     transform: translate(-50%, -50%);
     width: 70%;
     max-width: 800px;
-    aspect-ratio: 2 / 1;
-    background: url('https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg') no-repeat center / contain;
+    aspect-ratio: 600 / 133;
+    background: url('assets/logo.gif') no-repeat center / contain;
     z-index: 0;
     pointer-events: none;
     opacity: 0.15;
@@ -89,7 +89,7 @@ canvas {
     border: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow:
         0 15px 50px rgba(0, 0, 0, 0.10),
-        0 0 30px rgba(106, 175, 35, 0.08);
+        0 0 30px rgba(190, 22, 34, 0.08);
 }
 /* Titres */
 h2 {
@@ -99,7 +99,7 @@ h2 {
     margin-bottom: 5px;
 }
 h3 {
-    color: #00632E;
+    color: #BE1622;
     font-size: 2.2rem;
     margin-bottom: 30px;
     text-transform: uppercase;
@@ -117,7 +117,7 @@ h3 {
     min-width: 250px;
 }
 .bank-column h4 {
-    color: #00632E;
+    color: #BE1622;
     font-size: 1.2rem;
     margin-bottom: 20px;
     text-transform: uppercase;
@@ -147,7 +147,7 @@ h3 {
 }
 /* Boutons */
 button {
-    background: #6AAF23;
+    background: #D9303B;
     color: white;
     border: none;
     border-radius: 6px;
@@ -157,15 +157,15 @@ button {
     transition: all 0.3s ease;
 }
 button:hover {
-    background: #00632E;
+    background: #BE1622;
     transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(106, 175, 35, 0.30);
+    box-shadow: 0 0 15px rgba(190, 22, 34, 0.30);
 }
 button:active {
     transform: scale(0.95);
 }
 button:focus-visible {
-    outline: 3px solid #00632E;
+    outline: 3px solid #BE1622;
     outline-offset: 3px;
 }
 /* Notification de copie */
@@ -174,7 +174,7 @@ button:focus-visible {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: #00632E;
+    background: #BE1622;
     color: #fff;
     padding: 12px 18px;
     border-radius: 8px;
@@ -337,22 +337,6 @@ function toast(msg) {
     toastTimer = setTimeout(function () { t.remove(); }, 2500);
 }
 
-/* ------------------------------------------------------------------
-   LOGO DE FOND : repli local si le serveur distant ne répond pas
------------------------------------------------------------------- */
-(function () {
-    var remote = "https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg";
-    var links = document.querySelectorAll("link[data-fallback]");
-    var probe = new Image();
-    probe.onerror = function () {
-        var logo = document.getElementById("bgLogo");
-        if (logo) logo.style.backgroundImage = "url('assets/logo.jpg')";
-        for (var i = 0; i < links.length; i++) {
-            links[i].href = links[i].getAttribute("data-fallback");
-        }
-    };
-    probe.src = remote;
-})();
 
 /* ------------------------------------------------------------------
    ANIMATION DE FOND

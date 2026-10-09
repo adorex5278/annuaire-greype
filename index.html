@@ -10,9 +10,8 @@
     Tout ce qui se trouve entre les marqueurs TEAM:START et TEAM:END (plus
     bas dans ce fichier) est écrasé au prochain build. Pour modifier
     l'équipe : éditer team.json, puis lancer  python3 build.py
-  * Le logo distant (public.saintcharlesinternational.com) est VOLONTAIRE :
-    il est alimenté depuis la base INPI et se met à jour tout seul.
-    assets/logo.jpg n'est qu'un repli. Ne pas inverser.
+  * Le logo est le GIF animé de greype-france.com, copié dans assets/logo.gif.
+    assets/logo.jpg (dernière image du GIF) sert de repli et d'image OG.
   * La CSP ci-dessous est ACTIVE. Toute nouvelle ressource externe doit y
     être déclarée, sinon elle est bloquée sans message visible.
     google.com ET gstatic.com sont requis : s2/favicons redirige vers gstatic.
@@ -26,15 +25,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://public.saintcharlesinternational.com https://www.google.com https://*.gstatic.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://www.google.com https://*.gstatic.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
 
 <title>Annuaire GREYPE France — Notre Équipe</title>
 <meta name="description" content="Annuaire de l'équipe GREYPE France : contacts commerciaux et logistiques, standard, coordonnées multilingues et informations bancaires.">
-<meta name="theme-color" content="#0A5C3C">
+<meta name="theme-color" content="#BE1622">
 
-<!-- Favicon : logo syndicat (auto-MAJ via INPI), repli local si le tiers ne répond pas -->
-<link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/favicon.png">
-<link rel="apple-touch-icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/apple-touch-icon.png">
+<!-- Favicon : personnage du logo, recadré en carré -->
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <script>
 // Chaîne de repli pour toute image distante.
@@ -45,32 +44,18 @@ function fallbackImg(el) {
   el.setAttribute("data-fallbacks", list.slice(1).join(","));
   el.src = list[0];
 }
-
-// Le favicon n'a pas d'événement onerror : on teste le chargement du logo distant
-// et on bascule les <link> sur le repli local si l'image ne vient pas.
-(function () {
-  var links = document.querySelectorAll("link[data-fallback]");
-  if (!links.length) return;
-  var probe = new Image();
-  probe.onerror = function () {
-    for (var i = 0; i < links.length; i++) {
-      links[i].href = links[i].getAttribute("data-fallback");
-    }
-  };
-  probe.src = links[0].href;
-})();
 </script>
 
 <meta property="og:title" content="Annuaire GREYPE France - Notre Équipe">
 <meta property="og:description" content="Contactez directement notre équipe commerciale et logistique. Tous les numéros et coordonnées de GREYPE France en un seul endroit.">
-<meta property="og:image" content="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg">
+<meta property="og:image" content="https://adorex5278.github.io/annuaire-greype/assets/logo.jpg">
 <meta property="og:url" content="https://adorex5278.github.io/annuaire-greype/index.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Annuaire GREYPE France">
 <meta name="twitter:description" content="Contactez directement notre équipe commerciale et logistique.">
-<meta name="twitter:image" content="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg">
+<meta name="twitter:image" content="https://adorex5278.github.io/annuaire-greype/assets/logo.jpg">
 
 <style>
 body {
@@ -90,7 +75,7 @@ body {
 .top-btn {
   padding: 0.6rem 1.4rem;
   border-radius: 8px;
-  background: #0A5C3C;
+  background: #BE1622;
   color: white;
   font-weight: 600;
   font-size: 0.95rem;
@@ -98,13 +83,13 @@ body {
   transition: background 0.2s;
 }
 .top-btn:hover {
-  background: #10865F;
+  background: #D9303B;
 }
 
 .logo {
   display: block;
   margin: 0 auto 1.5rem;
-  width: clamp(120px, 20vw, 260px);
+  width: clamp(200px, 40vw, 400px);
   height: auto;
   object-fit: contain;
 }
@@ -112,14 +97,14 @@ body {
 h2 {
   font-size: 2.5rem;
   font-weight: 300;
-  color: #0A5C3C;
+  color: #BE1622;
   text-align: center;
 }
 
 .bar {
   width: 80px;
   height: 4px;
-  background: #7CB342;
+  background: #E8545E;
   margin: 1rem auto 2rem;
 }
 
@@ -144,7 +129,7 @@ h2 {
 
 .card-top {
   height: 4px;
-  background: linear-gradient(to right, #0A5C3C, #10865F);
+  background: linear-gradient(to right, #BE1622, #D9303B);
 }
 
 .card-content {
@@ -157,7 +142,7 @@ h2 {
   height: 60px;
   margin: 0 auto 1rem;
   border-radius: 50%;
-  background: linear-gradient(to bottom right, #0A5C3C, #10865F);
+  background: linear-gradient(to bottom right, #BE1622, #D9303B);
   color: #fff;
   font-size: 1.3rem;
   display: flex;
@@ -166,7 +151,7 @@ h2 {
 }
 
 .name {
-  color: #0A5C3C;
+  color: #BE1622;
   font-weight: 600;
 }
 
@@ -188,7 +173,7 @@ h2 {
 }
 
 .phone:hover {
-  background: #0A5C3C;
+  background: #BE1622;
   color: #fff;
 }
 
@@ -213,7 +198,7 @@ h2 {
 }
 
 .btn:focus-visible {
-  outline: 3px solid #0A5C3C;
+  outline: 3px solid #BE1622;
   outline-offset: 2px;
 }
 
@@ -280,7 +265,7 @@ h2 {
 }
 
 .standard-section h3 {
-  color: #0A5C3C;
+  color: #BE1622;
   font-size: 1.5rem;
   margin: 0 0 1rem 0;
 }
@@ -295,7 +280,7 @@ h2 {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.8rem 1.6rem;
-  background: #0A5C3C;
+  background: #BE1622;
   color: white;
   text-decoration: none;
   border-radius: 8px;
@@ -304,7 +289,7 @@ h2 {
 }
 
 .standard-phone:hover {
-  background: #10865F;
+  background: #D9303B;
 }
 
 .fiches-section {
@@ -316,7 +301,7 @@ h2 {
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 .fiches-section h3 {
-  color: #0A5C3C;
+  color: #BE1622;
   font-size: 1.3rem;
   text-align: center;
   margin: 0 0 1.5rem 0;
@@ -350,8 +335,8 @@ h2 {
   object-fit: contain;
 }
 .fiche-btn:hover {
-  background: #e8f5e9;
-  border-color: #0A5C3C;
+  background: #FDECEE;
+  border-color: #BE1622;
 }
 
 /* Sélection et téléchargement des fiches contact */
@@ -367,7 +352,7 @@ h2 {
 .pick-box {
   width: 18px;
   height: 18px;
-  accent-color: #0A5C3C;
+  accent-color: #BE1622;
   cursor: pointer;
 }
 /* Libellé lisible par les lecteurs d'écran seulement */
@@ -410,12 +395,12 @@ h2 {
   color: #555;
 }
 .tools a {
-  color: #0A5C3C;
+  color: #BE1622;
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid rgba(10,92,60,.35);
+  border-bottom: 1px solid rgba(190,22,34,.35);
 }
-.tools a:hover { border-bottom-color: #0A5C3C; }
+.tools a:hover { border-bottom-color: #BE1622; }
 
 .selbar {
   position: sticky;
@@ -423,7 +408,7 @@ h2 {
   z-index: 50;
   margin: 1.5rem auto 0;
   max-width: 660px;
-  background: #0A5C3C;
+  background: #BE1622;
   color: #fff;
   border-radius: 12px;
   padding: 0.9rem 1.2rem;
@@ -444,10 +429,10 @@ h2 {
   font-size: 0.9rem;
   cursor: pointer;
   background: #fff;
-  color: #0A5C3C;
+  color: #BE1622;
   transition: 0.2s;
 }
-.selbar button:hover { background: #d7f0e3; }
+.selbar button:hover { background: #F9D9DC; }
 .selbar button.ghost {
   background: transparent;
   color: #fff;
@@ -476,7 +461,7 @@ h2 {
 
 <body>
 
-<img class="logo" src="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" alt="GREYPE France"
+<img class="logo" src="assets/logo.gif" alt="GREYPE France" width="600" height="133"
      data-fallbacks="assets/logo.jpg,assets/logo-fallback.svg" onerror="fallbackImg(this)">
 <div class="top-links">
   <a class="top-btn" href="coordonnees.html?lang=fr">🇫🇷 Fiche société</a>

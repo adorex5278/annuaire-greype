@@ -8,13 +8,14 @@ de logo, et la liste des choix à ne pas « corriger ».
 
 | Fichier | Rôle |
 |---|---|
-| `logo.jpg` | copie locale du vrai logo, repli si le serveur distant tombe |
+| `logo.gif` | logo animé officiel (greype-france.com), affiché par les pages |
+| `logo.jpg` | dernière image du GIF : repli et image de partage (og:image) |
 | `logo-fallback.svg` | wordmark généré, dernier recours |
-| `favicon.png` / `apple-touch-icon.png` | recadrage sur la pastille du logo |
+| `favicon.png` / `apple-touch-icon.png` | recadrage sur le personnage du logo |
 | `favicon-wordmark.png` | variante logo entier, non branchée |
 | `favicon-fallback.svg` | monogramme G, non branché |
 | `icons/<site>.png` | vraies favicons des fiches financières |
 | `icons/<site>.svg` | pastilles générées, dernier recours |
 
-Le logo distant reste la source de vérité : ces fichiers ne se mettent pas
-à jour tout seuls, il faut les régénérer après un changement de logo.
+Ces fichiers ne se mettent pas à jour tout seuls : après un changement de
+logo, les régénérer (procédure dans `README.md`).

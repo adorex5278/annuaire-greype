@@ -40,19 +40,16 @@ en toutes lettres, sans délimiteurs.
 `build.py` **supprime tous les `.vcf`** du dossier avant de les réécrire.
 Ne rien y déposer à la main : ce sera perdu sans avertissement.
 
-### 3. Le logo distant est un choix, pas un oubli
+### 3. Le logo est hébergé dans le dépôt
 
-```html
-https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg
-```
+Depuis octobre 2026, le logo est le GIF animé du site officiel
+(https://www.greype-france.com/), copié dans `assets/logo.gif`. L'ancien logo
+distant (`public.saintcharlesinternational.com`, logo vert) n'est plus utilisé
+et a été retiré de la CSP.
 
-Ce n'est pas une dépendance à rapatrier. Ce fichier est alimenté depuis la base
-INPI par le syndicat professionnel : quand GREYPE déposera son nouveau logo,
-la page se mettra à jour toute seule. **Ne pas remplacer par la copie locale.**
-
-`assets/logo.jpg` existe uniquement comme repli si le serveur distant tombe.
-Cette copie ne se met pas à jour toute seule ; après un changement de logo il
-faut la régénérer (voir plus bas).
+`assets/logo.jpg` (dernière image du GIF) sert de repli et d'image de partage
+(`og:image`, qui doit rester une URL absolue). Ces fichiers ne se mettent pas à
+jour tout seuls : après un changement de logo, les régénérer (voir plus bas).
 
 ### 4. La CSP est active et se trouve dans le `<head>`
 
@@ -148,16 +145,18 @@ deux personnes produisent le même nom de fichier vCard.
 
 ### Après un changement de logo
 
-La page suit automatiquement. Régénérer les copies de secours :
+Remplacer le GIF puis régénérer les images fixes :
 
 ```bash
-cp nouveau-logo.jpg assets/logo.jpg
-convert assets/logo.jpg -crop 144x144+3+3 +repage -resize 64x64   assets/favicon.png
-convert assets/logo.jpg -crop 144x144+3+3 +repage -resize 180x180 assets/apple-touch-icon.png
+cp nouveau-logo.gif assets/logo.gif
+convert 'assets/logo.gif[-1]' -background white -flatten assets/logo.jpg
+convert assets/logo.jpg -crop 191x133+0+0 +repage -gravity center -background white -extent 203x203 -resize 64x64   assets/favicon.png
+convert assets/logo.jpg -crop 191x133+0+0 +repage -gravity center -background white -extent 203x203 -resize 180x180 assets/apple-touch-icon.png
 ```
 
-Le recadrage `144x144+3+3` isole la pastille verte du logo actuel — c'est ce qui
-reste lisible à 16 px dans un onglet. À réajuster si la composition change.
+Le recadrage `191x133+0+0` isole le personnage à gauche du logo (le mot
+« GREYPE » est illisible à 16 px dans un onglet). À réajuster si la composition
+change.
 
 ### Modifier un RIB
 
@@ -176,13 +175,12 @@ Helper `fallbackImg()` dans `index.html`. Attribut `data-fallbacks` contenant
 une liste séparée par des virgules, essayée dans l'ordre :
 
 ```html
-<img src="URL_DISTANTE"
+<img src="assets/logo.gif"
      data-fallbacks="assets/logo.jpg,assets/logo-fallback.svg"
      onerror="fallbackImg(this)">
 ```
 
-Le favicon n'a pas d'`onerror` : une sonde `new Image()` teste le logo distant
-et bascule les `<link data-fallback>` en cas d'échec.
+Les favicons pointent directement sur les PNG locaux, sans repli.
 
 ### Icônes SVG
 
@@ -247,7 +245,6 @@ Puis vérifier à la main, dans `index.html` et `greypebank.html` : un seul
 
 - Le type MIME des `.vcf` servis par GitHub Pages (détermine si iOS ouvre
   l'app Contacts directement ou passe par les téléchargements)
-- Le repli du logo distant, si le serveur du syndicat est joignable
 - Le comportement réel de l'import vCard sur iOS et Android
 
 Ces points se testent uniquement sur le site publié, depuis un vrai téléphone.

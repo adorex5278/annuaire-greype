@@ -26,14 +26,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fiche société — GREYPE FRANCE</title>
-<meta name="theme-color" content="#0A5C3C">
+<meta name="theme-color" content="#BE1622">
 <meta name="robots" content="noindex">
 
-<link rel="icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/favicon.png">
-<link rel="apple-touch-icon" href="https://public.saintcharlesinternational.com/wp-content/uploads/2019/05/greype.jpg" data-fallback="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <style>
-:root { --vert: #0A5C3C; --vert-clair: #10865F; --anis: #7CB342; }
+:root { --rouge: #BE1622; --rouge-clair: #D9303B; --rouge-pale: #E8545E; }
 
 * { box-sizing: border-box; }
 
@@ -62,7 +62,7 @@ body {
 }
 
 .retour {
-  color: var(--vert);
+  color: var(--rouge);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
@@ -84,15 +84,15 @@ body {
   transition: 0.2s;
   white-space: nowrap;
 }
-.btn-print { background: var(--vert); color: #fff; }
-.btn-print:hover { background: var(--vert-clair); }
+.btn-print { background: var(--rouge); color: #fff; }
+.btn-print:hover { background: var(--rouge-clair); }
 .btn-ghost {
   background: transparent;
-  color: var(--vert);
-  border: 1px solid rgba(10,92,60,0.35);
+  color: var(--rouge);
+  border: 1px solid rgba(190,22,34,0.35);
 }
-.btn-ghost:hover { background: rgba(10,92,60,0.06); }
-.btn:focus-visible { outline: 3px solid var(--vert); outline-offset: 2px; }
+.btn-ghost:hover { background: rgba(190,22,34,0.06); }
+.btn:focus-visible { outline: 3px solid var(--rouge); outline-offset: 2px; }
 
 /* Onglets de langue */
 .onglets {
@@ -115,12 +115,12 @@ body {
   white-space: nowrap;
   transition: 0.15s;
 }
-.onglet:hover { color: var(--vert); }
+.onglet:hover { color: var(--rouge); }
 .onglet[aria-selected="true"] {
-  color: var(--vert);
-  border-bottom-color: var(--anis);
+  color: var(--rouge);
+  border-bottom-color: var(--rouge-pale);
 }
-.onglet:focus-visible { outline: 3px solid var(--vert); outline-offset: -3px; }
+.onglet:focus-visible { outline: 3px solid var(--rouge); outline-offset: -3px; }
 
 /* Zone d'aperçu */
 .cadre {
