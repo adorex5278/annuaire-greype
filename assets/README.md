@@ -11,7 +11,7 @@ de logo, et la liste des choix à ne pas « corriger ».
 | `logo.gif` | logo animé officiel (greype-france.com), affiché par les pages |
 | `logo.jpg` | dernière image du GIF : repli et image de partage (og:image) |
 | `logo-fallback.svg` | wordmark généré, dernier recours |
-| `favicon.png` / `apple-touch-icon.png` | recadrage sur le personnage du logo |
+| `favicon.png` / `apple-touch-icon.png` | copie auto de l'icône de greype-france.com (workflow quotidien, ne pas éditer) |
 | `favicon-wordmark.png` | variante logo entier, non branchée |
 | `favicon-fallback.svg` | monogramme G, non branché |
 | `icons/<site>.png` | vraies favicons des fiches financières |

@@ -145,18 +145,26 @@ deux personnes produisent le même nom de fichier vCard.
 
 ### Après un changement de logo
 
-Remplacer le GIF puis régénérer les images fixes :
+Remplacer le GIF puis régénérer l'image fixe :
 
 ```bash
 cp nouveau-logo.gif assets/logo.gif
 convert 'assets/logo.gif[-1]' -background white -flatten assets/logo.jpg
-convert assets/logo.jpg -crop 191x133+0+0 +repage -gravity center -background white -extent 203x203 -resize 64x64   assets/favicon.png
-convert assets/logo.jpg -crop 191x133+0+0 +repage -gravity center -background white -extent 203x203 -resize 180x180 assets/apple-touch-icon.png
 ```
 
-Le recadrage `191x133+0+0` isole le personnage à gauche du logo (le mot
-« GREYPE » est illisible à 16 px dans un onglet). À réajuster si la composition
-change.
+### Icône d'onglet : synchronisée avec le site officiel
+
+`assets/favicon.png` et `assets/apple-touch-icon.png` sont une **copie de l'icône
+de www.greype-france.com**, mise à jour automatiquement : le workflow
+`.github/workflows/sync-favicon.yml` lance chaque jour
+`.github/scripts/sync_favicon.py`, qui relit le site, récupère son `<link rel="icon">`
+et commite seulement si l'icône a changé. Lancement manuel : onglet *Actions* du
+dépôt → *Synchroniser l'icône du site officiel* → *Run workflow*.
+
+Pourquoi une copie et pas un lien direct : l'URL de l'icône chez Framer change à
+chaque version, et la page du site officiel n'autorise pas la lecture depuis un
+autre domaine (pas de CORS). Ne pas modifier ces deux PNG à la main : ils seront
+écrasés à la prochaine synchro.
 
 ### Modifier un RIB
 
@@ -180,7 +188,7 @@ une liste séparée par des virgules, essayée dans l'ordre :
      onerror="fallbackImg(this)">
 ```
 
-Les favicons pointent directement sur les PNG locaux, sans repli.
+Les favicons pointent directement sur les PNG locaux (copie synchronisée du site officiel), sans repli.
 
 ### Icônes SVG
 
