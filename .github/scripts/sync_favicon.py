@@ -41,11 +41,12 @@ def main():
     targets = {"favicon.png": 64, "apple-touch-icon.png": 180}
     changed = False
     for name, size in targets.items():
-        buf = io.BytesIO()
-        icon.resize((size, size), Image.LANCZOS).save(buf, "PNG", optimize=True)
+        img = icon.resize((size, size), Image.LANCZOS)
         path = ASSETS / name
-        if not path.exists() or path.read_bytes() != buf.getvalue():
-            path.write_bytes(buf.getvalue())
+        # Comparer les pixels, pas les octets : deux versions de Pillow encodent
+        # la même image différemment, ce qui ferait un commit pour rien.
+        if not path.exists() or Image.open(path).convert("RGBA").tobytes() != img.tobytes():
+            img.save(path, "PNG", optimize=True)
             changed = True
             print(f"{name} mis à jour depuis {url}")
     if not changed:
