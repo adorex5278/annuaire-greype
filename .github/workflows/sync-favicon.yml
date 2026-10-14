@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "17 5 * * *"   # tous les jours vers 7 h (heure de Paris)
   workflow_dispatch:
+  push:                    # et à chaque modification de la synchro elle-même
+    branches: [main]
+    paths:
+      - .github/workflows/sync-favicon.yml
+      - .github/scripts/sync_favicon.py
 
 permissions:
   contents: write
